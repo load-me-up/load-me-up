@@ -3,15 +3,23 @@
   Shared stylesheet. One file, no build step.
 
   Restyle the site from the custom properties below.
-  Colour is three variables, declared once, with a light and a
-  dark value. Nothing else is a colour.
+  The warm neutrals are declared once, in :root, as six values:
 
-  --ink    black on white paper, white on black paper
+  --cream      #F7F3E8  light paper
+  --soot       #1F1D1A  light ink, a warm near-black
+  --stone      #6E6A60  light secondary text
+  --charcoal   #1C1B18  dark paper, warm, not black
+  --bone       #E8E3D5  dark ink, a dimmed cream
+  --ash        #9A958A  dark secondary text
+
+  The page uses these through four roles, which switch with the theme:
+
+  --paper  the page background
+  --ink    body text and links
   --grey   quiet secondary text: dates and the footer
   --red    full stops only: the strapline, the sign-off, the current page
 
-  The paper itself is white in light mode and black in dark mode.
-  It is not a fourth swatch.
+  Nothing else is a colour.
 
   --font-body         the reading face, then the fallbacks
   --measure           the text column, about 65 characters
@@ -27,18 +35,26 @@
   data-theme="dark" on the html element when it was chosen.
   With JavaScript off, the light values below are what show.
 
-  Red is #8B0000 on white paper. In the dark it is #B22222,
-  still a deep red, light enough to read on black (about 3:1).
+  Red is #8B0000 on cream. In the dark it is #B22222, still a
+  deep red, lighter so the dot shows on charcoal.
 */
 
 :root {
-  color-scheme: light;
-  background: #fff;
-  color: var(--ink);
+  --cream: #F7F3E8;
+  --soot: #1F1D1A;
+  --stone: #6E6A60;
+  --charcoal: #1C1B18;
+  --bone: #E8E3D5;
+  --ash: #9A958A;
 
-  --ink: #000;
-  --grey: #6e6e6e;
+  --paper: var(--cream);
+  --ink: var(--soot);
+  --grey: var(--stone);
   --red: #8B0000;
+
+  color-scheme: light;
+  background: var(--paper);
+  color: var(--ink);
 
   /*
     "Body" is the family name in the @font-face rules below.
@@ -62,13 +78,14 @@
 }
 
 :root[data-theme="dark"] {
-  color-scheme: dark;
-  background: #000;
-  color: var(--ink);
-
-  --ink: #fff;
-  --grey: #8a8a8a;
+  --paper: var(--charcoal);
+  --ink: var(--bone);
+  --grey: var(--ash);
   --red: #B22222;
+
+  color-scheme: dark;
+  background: var(--paper);
+  color: var(--ink);
 }
 
 /*
@@ -225,7 +242,7 @@ time {
   left: var(--space-page);
   top: 0;
   padding: 0.4rem 0.6rem;
-  background: Canvas;
+  background: var(--paper);
   color: var(--ink);
   text-decoration: none;
   transform: translateY(-120%);
@@ -539,13 +556,13 @@ hr::before {
 }
 
 .ground-light {
-  background: #fff;
-  color: #000;
+  background: var(--cream);
+  color: var(--soot);
 }
 
 .ground-dark {
-  background: #000;
-  color: #fff;
+  background: var(--charcoal);
+  color: var(--bone);
 }
 
 .plate-object {
@@ -554,11 +571,11 @@ hr::before {
 }
 
 .ground-light .plate-object {
-  background: #000;
+  background: var(--soot);
 }
 
 .ground-dark .plate-object {
-  background: #fff;
+  background: var(--bone);
 }
 
 .plate-object img {
@@ -687,11 +704,12 @@ hr::before {
   :root,
   :root[data-theme="dark"] {
     color-scheme: light;
-    background: #fff;
-    color: #000;
-    --ink: #000;
-    --grey: #000;
+    --paper: var(--cream);
+    --ink: var(--soot);
+    --grey: var(--soot);
     --red: #8B0000;
+    background: var(--paper);
+    color: var(--ink);
   }
 
   body {
