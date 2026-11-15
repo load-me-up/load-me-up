@@ -7,8 +7,8 @@
   dark value. Nothing else is a colour.
 
   --ink    black on white paper, white on black paper
-  --grey   quiet secondary text: dates, the strapline, the footer
-  --red    the sign-off full stop and the current-page dot only
+  --grey   quiet secondary text: dates and the footer
+  --red    full stops only: the strapline, the sign-off, the current page
 
   The paper itself is white in light mode and black in dark mode.
   It is not a fourth swatch.
@@ -312,7 +312,7 @@ main,
 
 .strapline {
   margin: 0.45rem 0 1.85rem;
-  color: var(--grey);
+  color: var(--ink);
   font-size: 0.95rem;
 }
 
@@ -498,12 +498,14 @@ hr::before {
 }
 
 /*
-  Red has two jobs: this full stop, and the current-page dot.
+  Red is only ever a full stop: the "Anon." under the masthead,
+  the sign-off, and the current-page dot.
 */
 .signoff {
   margin-top: var(--space-section);
 }
 
+.strapline .stop,
 .signoff .stop,
 .here {
   color: var(--red);
