@@ -355,9 +355,21 @@ main,
   text-underline-offset: 0.22em;
 }
 
+/*
+  Every item carries a dot, so the menu keeps its width on every
+  page. Only the current page's dot is shown. The current word stays
+  at normal weight: bold would widen it and push the others along.
+*/
 .site-nav a[aria-current="page"] {
-  font-weight: 700;
   text-decoration: none;
+}
+
+.site-nav .here {
+  visibility: hidden;
+}
+
+.site-nav a[aria-current="page"] + .here {
+  visibility: visible;
 }
 
 .theme-toggle {
