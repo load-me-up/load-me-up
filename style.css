@@ -1,0 +1,526 @@
+/*
+  Load me up
+  Shared stylesheet for the whole site. One file, no build step.
+
+  Restyle the site from the custom properties below. You should
+  not have to hunt through the rest of the file for a colour,
+  a measure, or a space.
+
+  --color-bg              page background
+  --color-text            body text
+  --color-muted           dates, nav, footer, secondary text
+  --color-accent          links and the quote rule
+  --color-accent-visited  visited links
+  --color-rule            hairlines under the header and above the notes
+  --color-ornament        the section-break asterisks
+  --color-select          text selection
+
+  --font-body             the reading face, then the fallbacks
+  --measure               the text column, about 65 characters
+  --leading               line height for prose
+  --size-body             body size, fluid
+  --size-title            essay title size, fluid
+  --space-page            outer margin, fluid
+  --space-paragraph       gap between paragraphs
+  --space-section         gap before a quote, a poem, or the notes
+*/
+
+:root {
+  color-scheme: light dark;
+
+  --color-bg: #f3eee4;
+  --color-text: #1e1b16;
+  --color-muted: #5c564c;
+  --color-accent: #6e3c28;
+  --color-accent-visited: #4a4568;
+  --color-rule: #ddd4c6;
+  --color-ornament: #6f685e;
+  --color-select: #e4d3bc;
+
+  /*
+    "Body" is the family name used in the @font-face rules
+    further down. To rename the family, change "Body" here
+    and in each of those rules. Keep the spelling identical,
+    including the capital.
+
+    Charter, Iowan Old Style and Georgia are what you see
+    before the font files are in /fonts/, and in any browser
+    that cannot use the file.
+  */
+  --font-body: "Body", Charter, "Iowan Old Style", Georgia, serif;
+
+  --measure: 65ch;
+  --leading: 1.7;
+  --size-body: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  --size-title: clamp(2rem, 1.35rem + 2vw, 2.75rem);
+  --space-page: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
+  --space-paragraph: 1.15em;
+  --space-section: 2.75rem;
+}
+
+/* Dark scheme. Same names, different values. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1b1a17;
+    --color-text: #e7e1d6;
+    --color-muted: #c2b9ab;
+    --color-accent: #e2b089;
+    --color-accent-visited: #d2c4ea;
+    --color-rule: #3c3832;
+    --color-ornament: #b1a89c;
+    --color-select: #3d3428;
+  }
+}
+
+/*
+  Font files.
+
+  OTF is the format in use. It keeps the extra OpenType
+  features (small caps, old-style figures, swashes, stylistic
+  sets). Put the licensed files in /fonts/ using these names:
+
+    /fonts/body-regular.otf
+    /fonts/body-italic.otf
+    /fonts/body-bold.otf
+
+  The WOFF2 line is optional, and it is commented out.
+  Uncomment it, and leave it first, if you later add:
+
+    /fonts/body-regular.woff2
+    /fonts/body-italic.woff2
+    /fonts/body-bold.woff2
+
+  Listed first, a WOFF2 is the file the browser prefers.
+  A WOFF2 keeps every OpenType feature unless a subsetting
+  tool has stripped it, so do not subset the features away.
+
+  Until the OTF files are there, the request fails and the
+  fallback stack above is used. To silence that request in
+  the meantime, comment out the three rules. Do that only
+  after removing the inner WOFF2 comment, or the two comments
+  will collide. CSS comments do not nest.
+*/
+
+@font-face {
+  font-family: "Body";
+  src:
+    /* url("/fonts/body-regular.woff2") format("woff2"), */
+    url("/fonts/body-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Body";
+  src:
+    /* url("/fonts/body-italic.woff2") format("woff2"), */
+    url("/fonts/body-italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Body";
+  src:
+    /* url("/fonts/body-bold.woff2") format("woff2"), */
+    url("/fonts/body-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+  OpenType features.
+
+  Two ways to turn a feature on:
+
+  1. font-variant (and font-kerning). This is the one to use.
+     It says what you want in plain language, and it composes:
+     a span can add small caps without wiping the figure style.
+  2. font-feature-settings. The same switch, by the four-letter
+     tag the font uses. Reach for it when there is no
+     font-variant name, or when you want the tag written out
+     so you can see it. Tags used here:
+
+       kern  kerning
+       liga  common ligatures
+       onum  old-style figures
+       pnum  proportional figures
+       lnum  lining figures
+       tnum  tabular figures
+       smcp  small caps
+       c2sc  small caps for capitals (so "Notes" is not "NOTES")
+       dlig  discretionary ligatures
+       swsh  swashes
+       ss01  stylistic set 1
+
+  Caution. font-feature-settings replaces the whole list it
+  inherits. It does not add one tag. Any rule that sets it
+  repeats the tags it still wants, usually kern and liga,
+  plus the figure style.
+
+  Body text turns on kerning, common ligatures, and old-style
+  proportional figures. The rest are opt-in classes:
+
+    .smallcaps   smcp and c2sc
+    .dlig        discretionary ligatures
+    .swash       swashes
+    .ss01        stylistic set 1
+
+  Dates and footnote numbers use lining tabular figures, so
+  the digits match in width and do not drop to old-style.
+
+  The @font-feature-values block lets font-variant-alternates
+  call the swash and the stylistic set by name. It only applies
+  to the family "Body". The font-feature-settings tags do the
+  same job without that block, which is why both are set.
+*/
+
+@font-feature-values "Body" {
+  @swash {
+    swsh: 1;
+  }
+  @styleset {
+    ss01: 1;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--color-select);
+  color: var(--color-text);
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: 400;
+  font-style: normal;
+  line-height: var(--leading);
+  /* Kerning, common ligatures, old-style proportional figures. */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dates: lining, tabular. */
+time {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+}
+
+/* Skip link. Hidden until a keyboard user focuses it. */
+.skip-link {
+  position: absolute;
+  left: var(--space-page);
+  top: 0;
+  padding: 0.4rem 0.6rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:visited {
+  color: var(--color-accent-visited);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* The column. Header, essay and footer share one measure. */
+.site-header,
+main,
+.site-footer {
+  width: min(var(--measure), calc(100% - 2 * var(--space-page)));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding-top: var(--space-page);
+  padding-bottom: 1.15rem;
+  margin-bottom: 2.25rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.site-name {
+  display: inline-block;
+  margin: 0 0 0.7rem;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+}
+
+.site-name:hover,
+.site-name:focus-visible {
+  color: var(--color-accent);
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  color: var(--color-muted);
+  text-decoration-color: var(--color-rule);
+  text-underline-offset: 0.25em;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] {
+  color: var(--color-text);
+  text-decoration-color: currentColor;
+}
+
+article {
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  text-wrap: pretty;
+}
+
+h1 {
+  margin: 0.15rem 0 0.55rem;
+  font-size: var(--size-title);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.dateline {
+  margin: 0 0 1.25rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.standfirst {
+  margin: 0 0 1.85rem;
+  font-size: 1.125em;
+  line-height: 1.5;
+}
+
+p {
+  margin: 0 0 var(--space-paragraph);
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* Pull quote. */
+blockquote {
+  margin: var(--space-section) 0;
+  padding: 0.1rem 0 0.1rem 1.2rem;
+  border-left: 2px solid var(--color-accent);
+  font-size: 1.125em;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/*
+  Section break. In the HTML this is a plain <hr>.
+  The asterisks are drawn here, centred.
+*/
+hr {
+  display: block;
+  height: auto;
+  margin: var(--space-section) 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ornament);
+  font-style: normal;
+  letter-spacing: 0.35em;
+  text-align: center;
+}
+
+hr::before {
+  content: "* * *";
+}
+
+/*
+  Poem. One line per line in the file. A blank line between
+  stanzas is the stanza gap, because white-space: pre-line
+  keeps line breaks and still wraps a long line on a phone.
+  Start the first line immediately after the opening tag,
+  or the break after that tag becomes a blank line.
+*/
+.poem {
+  margin: var(--space-section) 0;
+  line-height: 1.55;
+  white-space: pre-line;
+  hyphens: manual;
+  text-wrap: wrap;
+}
+
+/*
+  Footnote markers and the notes at the end.
+  Numbers are lining and tabular, unlike the old-style
+  figures in the prose.
+*/
+.footnote-ref {
+  font-size: 0.75em;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+  line-height: 0;
+}
+
+.footnote-ref a {
+  text-decoration: none;
+}
+
+.footnote-ref a:hover,
+.footnote-ref a:focus-visible {
+  text-decoration: underline;
+}
+
+.endnotes {
+  margin-top: var(--space-section);
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+}
+
+.endnotes h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.endnotes ol {
+  margin: 0;
+  padding-left: 1.35rem;
+}
+
+.endnotes li {
+  margin-top: 0.55em;
+  padding-left: 0.25rem;
+}
+
+.endnotes li::marker {
+  color: var(--color-muted);
+}
+
+.note-back {
+  margin-left: 0.35em;
+  font-size: 0.85em;
+}
+
+/* Opt-in OpenType classes. See the note near the top. */
+.smallcaps {
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1, "smcp" 1, "c2sc" 1;
+  letter-spacing: 0.04em;
+}
+
+.dlig {
+  font-variant-ligatures: common-ligatures discretionary-ligatures;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "onum" 1, "pnum" 1;
+}
+
+.swash {
+  font-variant-alternates: swash(swsh);
+  font-feature-settings: "kern" 1, "liga" 1, "swsh" 1, "onum" 1, "pnum" 1;
+}
+
+.ss01 {
+  font-variant-alternates: styleset(ss01);
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1, "onum" 1, "pnum" 1;
+}
+
+.site-footer {
+  margin-top: var(--space-section);
+  padding-top: 1.15rem;
+  padding-bottom: var(--space-page);
+  border-top: 1px solid var(--color-rule);
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  margin: 0.15em 0;
+}
+
+/*
+  Print. Black on white, no navigation.
+  Links lose their colour so they do not print as grey bars.
+*/
+@media print {
+  :root {
+    --color-bg: #fff;
+    --color-text: #000;
+    --color-muted: #000;
+    --color-accent: #000;
+    --color-accent-visited: #000;
+    --color-rule: #000;
+    --color-ornament: #000;
+  }
+
+  body {
+    font-size: 12pt;
+  }
+
+  .skip-link,
+  .site-nav {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .site-header,
+  .site-footer,
+  .endnotes {
+    border-color: #000;
+  }
+}
