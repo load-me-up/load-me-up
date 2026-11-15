@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>loadmeup</title>
+    <link>https://loadmeup.now/</link>
+    <description>loadmeup.now</description>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 15 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>An example essay</title>
+      <link>https://loadmeup.now/encounters/an-example-essay.html</link>
+      <guid isPermaLink="true">https://loadmeup.now/encounters/an-example-essay.html</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>An example poem</title>
+      <link>https://loadmeup.now/nocturnes/an-example-poem.html</link>
+      <guid isPermaLink="true">https://loadmeup.now/nocturnes/an-example-poem.html</guid>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

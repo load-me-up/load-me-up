@@ -1,47 +1,50 @@
 /*
-  Load me up
-  Shared stylesheet for the whole site. One file, no build step.
+  loadmeup
+  Shared stylesheet. One file, no build step.
 
-  Restyle the site from the custom properties below. You should
-  not have to hunt through the rest of the file for a colour,
-  a measure, or a space.
+  Restyle the site from the custom properties below.
 
-  --color-bg              page background
-  --color-text            body text
-  --color-muted           dates, nav, footer, secondary text
-  --color-accent          links and the quote rule
-  --color-accent-visited  visited links
-  --color-rule            hairlines under the header and above the notes
-  --color-ornament        the section-break asterisks
-  --color-select          text selection
+  --color-bg          page background
+  --color-text        body text
+  --color-muted       dates, strapline, secondary text
+  --color-rule        hairlines
+  --color-ornament    the asterism and the fleuron
+  --color-select      text selection
 
-  --font-body             the reading face, then the fallbacks
-  --measure               the text column, about 65 characters
-  --leading               line height for prose
-  --size-body             body size, fluid
-  --size-title            essay title size, fluid
-  --space-page            outer margin, fluid
-  --space-paragraph       gap between paragraphs
-  --space-section         gap before a quote, a poem, or the notes
+  --font-body         the reading face, then the fallbacks
+  --measure           the text column, about 65 characters
+  --leading           line height for prose
+  --size-body         body size, fluid
+  --size-title        title size, fluid
+  --space-page        outer margin
+  --space-paragraph   gap between paragraphs
+  --space-section     gap before a sign-off or a room
+
+  Light is the default. The brief asked for dark first; the
+  owner later reversed that. Dark is opt-in. theme.js sets
+  data-theme="dark" on the html element when it was chosen.
+  With JavaScript off, the light values below are what show.
+
+  The only colour on the site is #8B0000, used once, on the
+  full stop of the sign-off. Everything else is black, white
+  or grey.
 */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
-  --color-bg: #f3eee4;
-  --color-text: #1e1b16;
-  --color-muted: #5c564c;
-  --color-accent: #6e3c28;
-  --color-accent-visited: #4a4568;
-  --color-rule: #ddd4c6;
-  --color-ornament: #6f685e;
-  --color-select: #e4d3bc;
+  --color-bg: #f4f4f4;
+  --color-text: #1a1a1a;
+  --color-muted: #5c5c5c;
+  --color-rule: #d0d0d0;
+  --color-ornament: #6e6e6e;
+  --color-select: #d6d6d6;
 
   /*
-    "Body" is the family name used in the @font-face rules
-    further down. To rename the family, change "Body" here
-    and in each of those rules. Keep the spelling identical,
-    including the capital.
+    "Body" is the family name in the @font-face rules below.
+    To rename the family, change "Body" here and in each of
+    those rules. Keep the spelling identical, including the
+    capital.
 
     Charter, Iowan Old Style and Georgia are what you see
     before the font files are in /fonts/, and in any browser
@@ -53,23 +56,20 @@
   --leading: 1.7;
   --size-body: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
   --size-title: clamp(2rem, 1.35rem + 2vw, 2.75rem);
-  --space-page: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
+  --space-page: clamp(1.5rem, 4vw, 3rem);
   --space-paragraph: 1.15em;
   --space-section: 2.75rem;
 }
 
-/* Dark scheme. Same names, different values. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1b1a17;
-    --color-text: #e7e1d6;
-    --color-muted: #c2b9ab;
-    --color-accent: #e2b089;
-    --color-accent-visited: #d2c4ea;
-    --color-rule: #3c3832;
-    --color-ornament: #b1a89c;
-    --color-select: #3d3428;
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #121212;
+  --color-text: #e8e8e8;
+  --color-muted: #a8a8a8;
+  --color-rule: #2e2e2e;
+  --color-ornament: #9a9a9a;
+  --color-select: #3a3a3a;
 }
 
 /*
@@ -151,7 +151,7 @@
        lnum  lining figures
        tnum  tabular figures
        smcp  small caps
-       c2sc  small caps for capitals (so "Notes" is not "NOTES")
+       c2sc  small caps for capitals as well as lowercase
        dlig  discretionary ligatures
        swsh  swashes
        ss01  stylistic set 1
@@ -169,8 +169,8 @@
     .swash       swashes
     .ss01        stylistic set 1
 
-  Dates and footnote numbers use lining tabular figures, so
-  the digits match in width and do not drop to old-style.
+  Dates use lining tabular figures, so the digits match in
+  width and do not drop to old-style.
 
   The @font-feature-values block lets font-variant-alternates
   call the swash and the stylistic set by name. It only applies
@@ -211,7 +211,6 @@ body {
   font-weight: 400;
   font-style: normal;
   line-height: var(--leading);
-  /* Kerning, common ligatures, old-style proportional figures. */
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
   font-variant-numeric: oldstyle-nums proportional-nums;
@@ -225,7 +224,6 @@ time {
   font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
 }
 
-/* Skip link. Hidden until a keyboard user focuses it. */
 .skip-link {
   position: absolute;
   left: var(--space-page);
@@ -241,25 +239,25 @@ time {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-text);
   outline-offset: 3px;
 }
 
 a {
-  color: var(--color-accent);
+  color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
 }
 
 a:visited {
-  color: var(--color-accent-visited);
+  color: inherit;
 }
 
 a:hover {
   text-decoration-thickness: 2px;
 }
 
-/* The column. Header, essay and footer share one measure. */
+/* The column. Header, text and footer share one measure. */
 .site-header,
 main,
 .site-footer {
@@ -268,46 +266,77 @@ main,
 }
 
 .site-header {
-  padding-top: var(--space-page);
-  padding-bottom: 1.15rem;
-  margin-bottom: 2.25rem;
-  border-bottom: 1px solid var(--color-rule);
+  padding-top: clamp(2.75rem, 8vw, 5.5rem);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
-.site-name {
-  display: inline-block;
-  margin: 0 0 0.7rem;
-  color: var(--color-text);
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
+.masthead {
+  margin: 0;
+  font-size: clamp(1.85rem, 1.3rem + 1.6vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+.masthead a {
   text-decoration: none;
 }
 
-.site-name:hover,
-.site-name:focus-visible {
-  color: var(--color-accent);
+.masthead a:hover,
+.masthead a:focus-visible {
+  text-decoration: underline;
+}
+
+.strapline {
+  margin: 0.45rem 0 1.85rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.site-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
 }
 
 .site-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.25rem;
+  align-items: baseline;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.site-nav a {
+.site-nav li:not(:last-child)::after {
+  content: " · ";
   color: var(--color-muted);
-  text-decoration-color: var(--color-rule);
-  text-underline-offset: 0.25em;
 }
 
-.site-nav a:hover,
-.site-nav a:focus-visible,
-.site-nav a[aria-current="page"] {
-  color: var(--color-text);
-  text-decoration-color: currentColor;
+.site-nav a[aria-current] {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.theme-toggle {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+main {
+  padding-bottom: 0.5rem;
 }
 
 article {
@@ -317,24 +346,27 @@ article {
 }
 
 h1 {
-  margin: 0.15rem 0 0.55rem;
+  margin: 0 0 1rem;
   font-size: var(--size-title);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.15;
   text-wrap: balance;
 }
 
+.masthead {
+  /* The home h1 uses this class. Keep the masthead size. */
+  font-size: clamp(1.85rem, 1.3rem + 1.6vw, 2.4rem);
+}
+
 .dateline {
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
   color: var(--color-muted);
   font-size: 0.95rem;
 }
 
-.standfirst {
-  margin: 0 0 1.85rem;
-  font-size: 1.125em;
-  line-height: 1.5;
+.intro {
+  margin: 0 0 2rem;
 }
 
 p {
@@ -349,12 +381,10 @@ strong {
   font-weight: 700;
 }
 
-/* Pull quote. */
 blockquote {
   margin: var(--space-section) 0;
   padding: 0.1rem 0 0.1rem 1.2rem;
-  border-left: 2px solid var(--color-accent);
-  font-size: 1.125em;
+  border-left: 2px solid var(--color-rule);
   font-style: italic;
   line-height: 1.5;
 }
@@ -376,7 +406,7 @@ hr {
   background: transparent;
   color: var(--color-ornament);
   font-style: normal;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.2em;
   text-align: center;
 }
 
@@ -392,32 +422,136 @@ hr::before {
   or the break after that tag becomes a blank line.
 */
 .poem {
-  margin: var(--space-section) 0;
+  margin: 0 0 var(--space-paragraph);
   line-height: 1.55;
   white-space: pre-line;
   hyphens: manual;
   text-wrap: wrap;
 }
 
+.pieces {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pieces li {
+  margin: 0 0 1.15rem;
+}
+
+.pieces time {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
 /*
-  Footnote markers and the notes at the end.
-  Numbers are lining and tabular, unlike the old-style
-  figures in the prose.
+  Sign-off. The full stop is the only colour on the site.
 */
+.signoff {
+  margin-top: var(--space-section);
+}
+
+.signoff .stop {
+  color: #8B0000;
+}
+
+.room {
+  margin-top: var(--space-section);
+}
+
+.room h2 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/*
+  Evidence plates. The ground is the opposite of the object,
+  and the bands run the full width so the page alternates
+  as you scroll. These blacks and whites are not the theme:
+  a dark object stays on white, a light object stays on black.
+*/
+.plate {
+  width: 100vw;
+  margin: 0 0 0 calc(50% - 50vw);
+  padding: 2.75rem var(--space-page) 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.ground-light {
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.ground-dark {
+  background: #000;
+  color: #e8e8e8;
+}
+
+.plate-object {
+  width: min(68vw, 20rem);
+  aspect-ratio: 1;
+}
+
+.ground-light .plate-object {
+  background: #1a1a1a;
+}
+
+.ground-dark .plate-object {
+  background: #e6e6e6;
+}
+
+.plate-object img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plate figcaption {
+  width: min(var(--measure), 100%);
+  margin: 0;
+}
+
+.contact {
+  margin-top: var(--space-section);
+}
+
+/*
+  The manicule and the fleuron are dingbats. Name a few
+  symbol faces so the browser does not draw them from an
+  emoji font. Missing names are skipped.
+*/
+.manicule,
+.fleuron {
+  font-family: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols2", "Noto Sans Symbols 2", "DejaVu Sans", var(--font-body);
+  font-variant-emoji: text;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.manicule {
+  font-size: 1.15em;
+}
+
+.fleuron {
+  margin: 2.75rem 0 0.25rem;
+  color: var(--color-text);
+  font-size: 2.5rem;
+  text-align: center;
+}
+
 .footnote-ref {
   font-size: 0.75em;
   font-variant-numeric: lining-nums tabular-nums;
   font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
   line-height: 0;
-}
-
-.footnote-ref a {
-  text-decoration: none;
-}
-
-.footnote-ref a:hover,
-.footnote-ref a:focus-visible {
-  text-decoration: underline;
 }
 
 .endnotes {
@@ -443,19 +577,12 @@ hr::before {
 
 .endnotes li {
   margin-top: 0.55em;
-  padding-left: 0.25rem;
 }
 
 .endnotes li::marker {
   color: var(--color-muted);
 }
 
-.note-back {
-  margin-left: 0.35em;
-  font-size: 0.85em;
-}
-
-/* Opt-in OpenType classes. See the note near the top. */
 .smallcaps {
   font-variant-caps: all-small-caps;
   font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1, "smcp" 1, "c2sc" 1;
@@ -479,7 +606,7 @@ hr::before {
 
 .site-footer {
   margin-top: var(--space-section);
-  padding-top: 1.15rem;
+  padding-top: 1.25rem;
   padding-bottom: var(--space-page);
   border-top: 1px solid var(--color-rule);
   color: var(--color-muted);
@@ -487,20 +614,20 @@ hr::before {
 }
 
 .site-footer p {
-  margin: 0.15em 0;
+  margin: 0.2em 0;
 }
 
-/*
-  Print. Black on white, no navigation.
-  Links lose their colour so they do not print as grey bars.
-*/
+.site-footer a {
+  color: inherit;
+}
+
 @media print {
-  :root {
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
     --color-bg: #fff;
     --color-text: #000;
     --color-muted: #000;
-    --color-accent: #000;
-    --color-accent-visited: #000;
     --color-rule: #000;
     --color-ornament: #000;
   }
@@ -510,17 +637,11 @@ hr::before {
   }
 
   .skip-link,
-  .site-nav {
+  .theme-toggle {
     display: none;
   }
 
   a {
     text-decoration: none;
-  }
-
-  .site-header,
-  .site-footer,
-  .endnotes {
-    border-color: #000;
   }
 }
