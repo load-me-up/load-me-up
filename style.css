@@ -297,10 +297,15 @@ main,
   margin-inline: auto;
 }
 
+/*
+  The rule under the nav matches the footer's rule above it,
+  so the page reads: top rule, body, bottom rule.
+*/
 .site-header {
   padding-top: clamp(2.75rem, 8vw, 5.5rem);
-  padding-bottom: 1.25rem;
-  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
 }
 
 .masthead {
@@ -389,9 +394,18 @@ main,
   visibility: visible;
 }
 
+/*
+  The symbol is small, the tap target is 44 by 44.
+  Negative margins keep the bigger box from moving the layout.
+*/
 .theme-toggle {
-  margin: 0;
-  padding: 0.1rem 0.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin: -12px -12px -12px 0;
+  padding: 0;
   border: 0;
   background: none;
   color: var(--ink);
@@ -401,6 +415,68 @@ main,
   font-variant-emoji: text;
   line-height: 1;
   cursor: pointer;
+}
+
+/*
+  Phones. The toggle moves up beside the masthead, and the four
+  doors sit in a two-by-two grid without separators. The hidden
+  dots stay, so the current page's red dot does not shift anything.
+*/
+@media (max-width: 599px) {
+  .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .masthead {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .strapline {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-bottom: 1.25rem;
+  }
+
+  .site-tools {
+    display: contents;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 -12px 0 0;
+  }
+
+  .site-nav {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .site-nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-nav li {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .site-nav li:not(:last-child)::after {
+    content: none;
+  }
+
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }
 
 main {
@@ -681,11 +757,15 @@ hr::before {
   padding-bottom: var(--space-page);
   border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
   color: var(--grey);
-  font-size: 0.95rem;
 }
 
+/*
+  The smaller size sits on the paragraphs, not the footer, so the
+  footer's 65ch column (and its rule) matches the header's.
+*/
 .site-footer p {
   margin: 0.2em 0;
+  font-size: 0.95rem;
 }
 
 .site-footer a,
