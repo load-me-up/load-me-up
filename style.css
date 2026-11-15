@@ -302,18 +302,28 @@ main,
   so the page reads: top rule, body, bottom rule.
 */
 .site-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 1rem;
   padding-top: clamp(2.75rem, 8vw, 5.5rem);
   padding-bottom: 1.75rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
 }
 
+/*
+  The wordmark. On the home page it is the h1, elsewhere a p;
+  the class sets the size either way. It outranks the page titles.
+*/
 .masthead {
+  grid-column: 1;
+  grid-row: 1;
   margin: 0;
-  font-size: clamp(1.85rem, 1.3rem + 1.6vw, 2.4rem);
+  font-size: clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem);
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1;
   text-transform: none;
 }
 
@@ -333,17 +343,21 @@ main,
 }
 
 .strapline {
-  margin: 0.45rem 0 1.85rem;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0.2rem 0 1.85rem;
   color: var(--ink);
   font-size: 0.95rem;
 }
 
+/* The nav and the toggle are placed in the header's grid directly. */
 .site-tools {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
+  display: contents;
+}
+
+.site-nav {
+  grid-column: 1 / -1;
+  grid-row: 3;
 }
 
 .site-nav ul {
@@ -399,16 +413,18 @@ main,
   Negative margins keep the bigger box from moving the layout.
 */
 .theme-toggle {
+  grid-column: 2;
+  grid-row: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 44px;
   min-height: 44px;
-  margin: -12px -12px -12px 0;
+  margin: 0 -12px 0 0;
   padding: 0;
   border: 0;
   background: none;
-  color: var(--ink);
+  color: var(--grey);
   font-family: var(--font-body), "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols2", "Noto Sans Symbols 2", "DejaVu Sans", serif;
   font-size: 1.35rem;
   font-weight: 400;
@@ -418,43 +434,18 @@ main,
 }
 
 /*
-  Phones. The toggle moves up beside the masthead, and the four
-  doors sit in a two-by-two grid without separators. The hidden
-  dots stay, so the current page's red dot does not shift anything.
+  Phones. The four doors sit in a two-by-two grid without
+  separators. The hidden dots stay, so the current page's red dot
+  does not shift anything.
 */
 @media (max-width: 599px) {
   .site-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
     padding-bottom: 1.5rem;
     margin-bottom: 2.5rem;
   }
 
-  .masthead {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
   .strapline {
-    grid-column: 1 / -1;
-    grid-row: 2;
     margin-bottom: 1.25rem;
-  }
-
-  .site-tools {
-    display: contents;
-  }
-
-  .theme-toggle {
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0 -12px 0 0;
-  }
-
-  .site-nav {
-    grid-column: 1 / -1;
-    grid-row: 3;
   }
 
   .site-nav ul {
@@ -496,11 +487,6 @@ h1 {
   letter-spacing: 0;
   line-height: 1.15;
   text-wrap: balance;
-}
-
-.masthead {
-  /* The home h1 uses this class. Keep the masthead size. */
-  font-size: clamp(1.85rem, 1.3rem + 1.6vw, 2.4rem);
 }
 
 .dateline {
@@ -766,6 +752,13 @@ hr::before {
 .site-footer p {
   margin: 0.2em 0;
   font-size: 0.95rem;
+}
+
+/* Clear Safari's floating address bar on phones. */
+@media (max-width: 599px) {
+  .site-footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
 }
 
 .site-footer a,
