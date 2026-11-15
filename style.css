@@ -334,7 +334,8 @@ main,
 }
 
 .site-nav li:not(:last-child)::after {
-  content: " · ";
+  content: "·";
+  margin-inline: 0.85em;
   color: var(--grey);
 }
 
