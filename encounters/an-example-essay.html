@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="email=no, telephone=no, address=no">
   <title>An example essay</title>
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="/style.css">
@@ -22,13 +23,13 @@
     <div class="site-tools">
       <nav class="site-nav" aria-label="Sections">
         <ul>
-          <li><a href="/encounters/" aria-current="true">Encounters</a></li>
+          <li><a href="/encounters/" aria-current="page">Encounters</a><span class="here" aria-hidden="true">.</span></li>
           <li><a href="/nocturnes/">Nocturnes</a></li>
           <li><a href="/evidence/">Evidence</a></li>
           <li><a href="/nobody.html">Nobody</a></li>
         </ul>
       </nav>
-      <button type="button" class="theme-toggle" id="theme-toggle">Dark</button>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾︎</button>
     </div>
   </header>
   <main id="content">
@@ -39,7 +40,7 @@
       </header>
       <!-- PLACEHOLDER. Replace these paragraphs. -->
       <p>Placeholder.</p>
-      <p>Placeholder.</p>
+      <p>Placeholder. <a href="/encounters/">Placeholder link</a>.</p>
       <p class="signoff">– Anon<span class="stop">.</span></p>
     </article>
   </main>

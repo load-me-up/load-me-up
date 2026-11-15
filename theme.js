@@ -1,6 +1,8 @@
 (function () {
   var root = document.documentElement;
   var key = "theme";
+  var moon = "\u263E\uFE0E";
+  var sun = "\u263C\uFE0E";
 
   try {
     if (localStorage.getItem(key) === "dark") {
@@ -10,7 +12,10 @@
 
   function label(button) {
     var dark = root.getAttribute("data-theme") === "dark";
-    button.textContent = dark ? "Light" : "Dark";
+    var name = dark ? "Switch to light mode" : "Switch to dark mode";
+    button.textContent = dark ? sun : moon;
+    button.setAttribute("aria-label", name);
+    button.setAttribute("title", name);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
