@@ -406,11 +406,6 @@ main,
   text-transform: none;
 }
 
-/* A hair of air after the d, so it reads load + meup. */
-.masthead .load {
-  margin-right: 0.03em;
-}
-
 .masthead a,
 .masthead a:visited {
   color: var(--ink);
@@ -424,6 +419,44 @@ main,
   text-decoration-thickness: 1px;
   text-decoration-color: var(--ink);
   text-underline-offset: 0.15em;
+}
+
+/*
+  Wide screens. Two lines, "load" over "meup", set tight.
+  "meup" is the wider word. It is tightened, and "load"
+  is opened, by the same amount, so the lines are one
+  width. The margin takes back the letter-spacing after
+  the last letter, and the edges meet.
+*/
+@media (min-width: 600px) {
+  .masthead {
+    line-height: 0.9;
+  }
+
+  .masthead a {
+    display: block;
+    width: max-content;
+    line-height: 0.9;
+  }
+
+  .masthead .load,
+  .masthead .meup {
+    display: block;
+  }
+
+  .masthead .load {
+    letter-spacing: 0.0915em;
+    margin-right: -0.0915em;
+  }
+
+  .masthead .meup {
+    letter-spacing: -0.0915em;
+    margin-right: 0.0915em;
+  }
+
+  .site-header {
+    align-items: start;
+  }
 }
 
 .strapline {
@@ -492,10 +525,12 @@ main,
 }
 
 /*
-  The moon and the sun sit in the same row as the wordmark,
-  centred on it. 1.25rem on a phone, 1.5rem from 600px up.
-  The tap target stays 44 by 44. Negative margins keep that
-  box from moving the layout. The colour is the secondary grey.
+  The moon and the sun. On a phone the icon is centred on
+  the single wordmark. From 600px up the wordmark is two
+  lines, and the icon sits on the top line, at the right.
+  1.25rem on a phone, 1.5rem from 600px up. The tap target
+  stays 44 by 44. Negative margins keep that box from
+  moving the layout. The colour is the secondary grey.
 */
 .theme-toggle {
   grid-column: 2;
@@ -536,6 +571,7 @@ main,
 @media (min-width: 600px) {
   .theme-toggle {
     font-size: 1.5rem;
+    margin-top: calc((0.9 * clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 }
 
