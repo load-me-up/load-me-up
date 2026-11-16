@@ -64,8 +64,8 @@
     capital.
 
     Charter, Iowan Old Style and Georgia are what you see
-    before the font files are in /fonts/, and in any browser
-    that cannot use the file.
+    while Jannon Text loads, and in any browser that cannot
+    use the file.
   */
   --font-body: "Body", Charter, "Iowan Old Style", Georgia, serif;
 
@@ -92,37 +92,27 @@
 /*
   Font files.
 
-  OTF is the format in use. It keeps the extra OpenType
-  features (small caps, old-style figures, swashes, stylistic
-  sets). Put the licensed files in /fonts/ using these names:
+  Jannon Text, served as WOFF, is the body face. WOFF keeps
+  the extra OpenType features (small caps, old-style figures,
+  swashes, stylistic sets). The six files in /fonts/ are:
 
-    /fonts/body-regular.otf
-    /fonts/body-italic.otf
-    /fonts/body-bold.otf
+    /fonts/JannonText.woff
+    /fonts/JannonText-Italic.woff
+    /fonts/JannonText-Medium.woff
+    /fonts/JannonText-MediumItalic.woff
+    /fonts/JannonText-Bold.woff
+    /fonts/JannonText-BoldItalic.woff
 
-  The WOFF2 line is optional, and it is commented out.
-  Uncomment it, and leave it first, if you later add:
-
-    /fonts/body-regular.woff2
-    /fonts/body-italic.woff2
-    /fonts/body-bold.woff2
-
-  Listed first, a WOFF2 is the file the browser prefers.
-  A WOFF2 keeps every OpenType feature unless a subsetting
-  tool has stripped it, so do not subset the features away.
-
-  Until the OTF files are there, the request fails and the
-  fallback stack above is used. To silence that request in
-  the meantime, comment out the three rules. Do that only
-  after removing the inner WOFF2 comment, or the two comments
-  will collide. CSS comments do not nest.
+  Each @font-face rule loads one of those files with
+  format("woff"). The family name stays "Body", which is
+  what --font-body names. Weights are 400 (regular), 500
+  (medium) and 700 (bold), each in a normal style and an
+  italic style.
 */
 
 @font-face {
   font-family: "Body";
-  src:
-    /* url("/fonts/body-regular.woff2") format("woff2"), */
-    url("/fonts/body-regular.otf") format("opentype");
+  src: url("/fonts/JannonText.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -130,9 +120,7 @@
 
 @font-face {
   font-family: "Body";
-  src:
-    /* url("/fonts/body-italic.woff2") format("woff2"), */
-    url("/fonts/body-italic.otf") format("opentype");
+  src: url("/fonts/JannonText-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -140,11 +128,33 @@
 
 @font-face {
   font-family: "Body";
-  src:
-    /* url("/fonts/body-bold.woff2") format("woff2"), */
-    url("/fonts/body-bold.otf") format("opentype");
+  src: url("/fonts/JannonText-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Body";
+  src: url("/fonts/JannonText-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Body";
+  src: url("/fonts/JannonText-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Body";
+  src: url("/fonts/JannonText-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
   font-display: swap;
 }
 
