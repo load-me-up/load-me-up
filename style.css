@@ -935,8 +935,8 @@ hr::before {
 
 /*
   The note under the email. Sans, smaller than the reading
-  text, held to a short measure. The hairline above it is
-  centred on the column.
+  text, centred on a short measure like a colophon. The
+  hairline above it is centred on the same column.
 */
 .smallprint {
   margin-top: 1.75rem;
@@ -953,13 +953,16 @@ hr::before {
 
 .smallprint span {
   display: block;
-  max-width: 32em;
+  max-width: 30em;
+  margin-inline: auto;
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
   font-size: 0.8em;
   line-height: 1.5;
   color: var(--grey);
+  text-align: center;
+  text-wrap: balance;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
 }
