@@ -491,8 +491,10 @@ main,
 }
 
 /*
-  The symbol is small, the tap target is 44 by 44.
-  Negative margins keep the bigger box from moving the layout.
+  The moon and the sun sit in the same row as the wordmark,
+  centred on it. 1.25rem on a phone, 1.5rem from 600px up.
+  The tap target stays 44 by 44. Negative margins keep that
+  box from moving the layout. The colour is the secondary grey.
 */
 .theme-toggle {
   grid-column: 2;
@@ -500,8 +502,8 @@ main,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  width: 44px;
+  height: 44px;
   margin: 0 -12px 0 0;
   padding: 0;
   border: 0;
@@ -516,6 +518,12 @@ main,
   font-feature-settings: normal;
   line-height: 1;
   cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .theme-toggle {
+    font-size: 1.5rem;
+  }
 }
 
 /*
