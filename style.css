@@ -948,13 +948,15 @@ hr::before {
   that does not follow the theme. Six true squares, three
   by two, and two by three on a phone. The field has a
   margin around the grid, and the gutters are a visible
-  share of the plate. The caption starts with the plate
-  number and sits inside the field, its words flush with
-  the grid, "Anon." at the right with the dark red on its
-  full stop. Placeholders are a grey gradient. Nothing on
-  the field switches with the theme. Numbers run across
-  both rooms. Plates in a room are stacked with a clear
-  gap; the newest one is last.
+  share of the plate. The caption strip follows the grid
+  in the flow: a gap, then the words, then the field's
+  own padding. It grows with the caption. The number
+  starts the line, flush with the grid, and "Anon." sits
+  at the right with the dark red on its full stop.
+  Placeholders are a grey gradient. Nothing on the field
+  switches with the theme. Numbers run across both rooms.
+  Plates in a room are stacked with a clear gap; the
+  newest one is last.
 */
 .plate-entry + .plate-entry {
   margin-top: 3rem;
@@ -1008,7 +1010,7 @@ hr::before {
 
 .plate {
   margin: 0;
-  padding: 2.5% 2.5% 0;
+  padding: 2.5%;
   background: #000;
   color: #E8E3D5;
 }
@@ -1037,9 +1039,9 @@ hr::before {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1.25rem;
-  margin: 0;
-  padding: calc(1.5% / 0.95) 0;
+  gap: 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
