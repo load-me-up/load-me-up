@@ -887,6 +887,53 @@ html.ornaments .orn {
   font-size: 0.95rem;
 }
 
+/*
+  Wide screens. The footer spans the same column as the text.
+  The name and the tagline sit on the left. The section links
+  and RSS sit on the right, flush to that edge. Each pair shares
+  a baseline, so the tagline lines up with RSS.
+*/
+@media (min-width: 600px) {
+  .site-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    column-gap: 2rem;
+    row-gap: 0.35em;
+  }
+
+  .site-footer > p:first-of-type {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-footer > nav {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .site-footer > p:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .site-footer > p:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+  }
+
+  .site-footer > p,
+  .site-footer nav p {
+    margin: 0;
+  }
+
+  .site-footer nav p {
+    white-space: nowrap;
+  }
+}
+
 /* Clear Safari's floating address bar on phones. */
 @media (max-width: 599px) {
   .site-footer {
