@@ -719,6 +719,120 @@ hr::before {
 }
 
 /*
+  Encounters. A year in small grey Sans, then each essay:
+  the title, one italic line, the date. A hairline between
+  entries. The pieces above stay as they are for a list
+  that has not been grouped.
+*/
+.year {
+  margin: 2.75rem 0 0;
+}
+
+.year:first-of-type {
+  margin-top: 0;
+}
+
+.year h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--grey);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.year .pieces li {
+  margin: 0;
+  padding: 1.45rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+.year .pieces li:first-child {
+  border-top: 0;
+}
+
+.year .pieces a {
+  font-size: 1.3em;
+  line-height: 1.25;
+}
+
+.teaser {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.year .pieces time {
+  margin-top: 0.45rem;
+}
+
+/*
+  Nocturnes. Title on the left, date on the right, one
+  baseline, a dotted leader between them. On a phone the
+  date drops under the title and the leader goes.
+*/
+.poems li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75em;
+  margin: 0 0 1.05rem;
+}
+
+.poems a {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.poems .leader {
+  flex: 1 1 0;
+  min-width: 1.25em;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--grey);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.85em;
+  letter-spacing: 0.42em;
+  line-height: 1;
+}
+
+.poems .leader::before {
+  content: "····························································";
+}
+
+.poems time {
+  flex: 0 0 auto;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .poems li {
+    display: block;
+  }
+
+  .poems a {
+    white-space: normal;
+  }
+
+  .poems .leader {
+    display: none;
+  }
+
+  .poems time {
+    margin-top: 0.15rem;
+    white-space: normal;
+  }
+}
+
+/*
   Red is only ever a full stop: the "Anon." under the masthead,
   page titles, the sign-off, the footer tagline, and the
   current-page dot.
