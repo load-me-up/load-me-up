@@ -31,10 +31,11 @@
   --space-paragraph   gap between paragraphs
   --space-section     gap before a sign-off or a room
 
-  Light is the default. The brief asked for dark first; the
-  owner later reversed that. Dark is opt-in. theme.js sets
-  data-theme="dark" on the html element when it was chosen.
-  With JavaScript off, the light values below are what show.
+  An inline script in the head sets the theme before this
+  file is applied. With no saved choice it follows the
+  visitor's system. A saved choice overrides that. The
+  light values below are the fallback when that script
+  does not run.
 
   Red is #A8201A on cream. In the dark it is #D0403A, still a
   deep red, lighter so the dot shows on charcoal.
@@ -513,6 +514,18 @@ main,
   font-feature-settings: normal;
   line-height: 1;
   cursor: pointer;
+}
+
+.theme-toggle .toggle-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .toggle-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .toggle-sun {
+  display: inline;
 }
 
 @media (min-width: 600px) {

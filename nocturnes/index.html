@@ -6,6 +6,27 @@
   <meta name="format-detection" content="email=no, telephone=no, address=no">
   <title>Nocturnes</title>
   <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F7F3E8">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch (err) {}
+      var systemDark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+      var dark = saved === "dark" || (saved !== "light" && systemDark);
+      if (dark) {
+        root.setAttribute("data-theme", "dark");
+      } else {
+        root.removeAttribute("data-theme");
+      }
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute("content", dark ? "#1C1B18" : "#F7F3E8");
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="loadmeup" href="/feed.xml">
   <script src="/theme.js"></script>
@@ -24,7 +45,7 @@
           <li><a href="/nobody.html">Nobody</a><span class="here" aria-hidden="true">.</span></li>
         </ul>
       </nav>
-      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾︎</button>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="toggle-moon" aria-hidden="true">&#9790;&#65038;</span><span class="toggle-sun" aria-hidden="true">&#9788;&#65038;</span></button>
     </div>
   </header>
   <main id="content">

@@ -1,14 +1,41 @@
 (function () {
   var root = document.documentElement;
   var key = "theme";
-  var moon = "\u263E\uFE0E";
-  var sun = "\u263C\uFE0E";
+  var lightBar = "#F7F3E8";
+  var darkBar = "#1C1B18";
 
-  try {
-    if (localStorage.getItem(key) === "dark") {
-      root.setAttribute("data-theme", "dark");
+  function saved() {
+    try {
+      return localStorage.getItem(key);
+    } catch (err) {
+      return null;
     }
-  } catch (err) {}
+  }
+
+  function darkNow() {
+    return root.getAttribute("data-theme") === "dark";
+  }
+
+  function paint(dark) {
+    if (dark) {
+      root.setAttribute("data-theme", "dark");
+    } else {
+      root.removeAttribute("data-theme");
+    }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", dark ? darkBar : lightBar);
+    }
+  }
+
+  function label(button) {
+    if (!button) {
+      return;
+    }
+    var name = darkNow() ? "Switch to light mode" : "Switch to dark mode";
+    button.setAttribute("aria-label", name);
+    button.setAttribute("title", name);
+  }
 
   /*
     The ornament spans are hidden in CSS until this face has
@@ -30,12 +57,21 @@
     }).catch(function () {});
   }
 
-  function label(button) {
-    var dark = root.getAttribute("data-theme") === "dark";
-    var name = dark ? "Switch to light mode" : "Switch to dark mode";
-    button.textContent = dark ? sun : moon;
-    button.setAttribute("aria-label", name);
-    button.setAttribute("title", name);
+  var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  if (media) {
+    var followSystem = function () {
+      var choice = saved();
+      if (choice === "light" || choice === "dark") {
+        return;
+      }
+      paint(media.matches);
+      label(document.getElementById("theme-toggle"));
+    };
+    if (media.addEventListener) {
+      media.addEventListener("change", followSystem);
+    } else if (media.addListener) {
+      media.addListener(followSystem);
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -45,17 +81,11 @@
     }
     label(button);
     button.addEventListener("click", function () {
-      if (root.getAttribute("data-theme") === "dark") {
-        root.removeAttribute("data-theme");
-        try {
-          localStorage.removeItem(key);
-        } catch (err) {}
-      } else {
-        root.setAttribute("data-theme", "dark");
-        try {
-          localStorage.setItem(key, "dark");
-        } catch (err) {}
-      }
+      var nextDark = !darkNow();
+      paint(nextDark);
+      try {
+        localStorage.setItem(key, nextDark ? "dark" : "light");
+      } catch (err) {}
       label(button);
     });
   });
