@@ -592,12 +592,6 @@ hr::before {
   color: var(--red);
 }
 
-/* Half size, on the baseline, so it reads as punctuation. */
-.title-stop {
-  font-size: 0.5em;
-  vertical-align: baseline;
-}
-
 .room {
   margin-top: var(--space-section);
 }
