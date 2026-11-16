@@ -849,37 +849,95 @@ hr::before {
   color: var(--red);
 }
 
-.room {
-  margin-top: var(--space-section);
+/*
+  Evidence rooms. Relics, then Voyages. The heading is
+  Antiqua, larger than a plate title. A one-line intro is
+  optional. Rooms sit further apart than the plates inside
+  them, and a hairline sits just above every room after
+  the first.
+*/
+.room + .room {
+  margin-top: 5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
 }
 
 .room h2 {
-  margin: 0 0 1rem;
-  font-size: 1.35rem;
+  margin: 0 0 1.5rem;
+  font-size: 1.6em;
   line-height: 1.2;
+  text-wrap: balance;
+}
+
+.room h2:has(+ .room-intro) {
+  margin-bottom: 0.45rem;
+}
+
+.room-intro {
+  margin: 0 0 1.5rem;
+  line-height: 1.45;
 }
 
 /*
-  Evidence plates. A contact sheet: plate number on the page,
-  then a black field that does not follow the theme. Six
-  true squares, three by two, and two by three on a phone.
-  The field has a margin around the grid, and the gutters
-  are a visible share of the plate. The caption strip sits
-  inside the field, its words flush with the grid, "Anon."
-  at the right with the dark red on its full stop.
-  Placeholders are a grey gradient. Nothing here switches
-  with the theme.
+  Evidence plates. Each one is its own piece: a title line
+  on the page, then a black field that does not follow the
+  theme. Six true squares, three by two, and two by three
+  on a phone. The field has a margin around the grid, and
+  the gutters are a visible share of the plate. The caption
+  strip sits inside the field, its words flush with the
+  grid, "Anon." at the right with the dark red on its full
+  stop. Placeholders are a grey gradient. Nothing on the
+  field switches with the theme. Plates in a room are
+  stacked with a clear gap; the newest one is last.
 */
-.plate-no {
-  margin: 2.75rem 0 0.55rem;
+.plate-entry + .plate-entry {
+  margin-top: 3rem;
+}
+
+.plate-entry {
+  scroll-margin-top: 1.25rem;
+}
+
+.plate-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin: 0 0 0.65rem;
+}
+
+.plate-title h3 {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.3em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.plate-title time {
+  flex: 0 0 auto;
+  margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  color: var(--grey);
-  font-variant-numeric: lining-nums proportional-nums;
-  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .plate-title {
+    display: block;
+  }
+
+  .plate-title time {
+    display: block;
+    margin-top: 0.2rem;
+    white-space: normal;
+  }
 }
 
 .plate {
@@ -901,9 +959,11 @@ hr::before {
 }
 
 .plate-square {
+  display: block;
   width: 100%;
   min-width: 0;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
   background: linear-gradient(to bottom right, #D8D8D8, #BDBDBD);
 }
 
