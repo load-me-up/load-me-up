@@ -860,72 +860,73 @@ hr::before {
 }
 
 /*
-  Evidence plates. The ground is the opposite of the object,
-  and the bands run the full width so the page alternates
-  as you scroll. These blacks and whites are not the theme:
-  a dark object stays on white, a light object stays on black.
+  Evidence plates. A contact sheet: plate number on the page,
+  then a black field that does not follow the theme. Six
+  squares, three by two, and two by three on a phone. Thin
+  black gutters. The caption strip sits inside the field,
+  the words in bone, "Anon." at the right with the dark-theme
+  red on its full stop. Placeholders are a grey gradient.
+  Nothing here switches with the theme.
 */
-.plate {
-  width: 100vw;
-  margin: 0 0 0 calc(50% - 50vw);
-  padding: 2.75rem var(--space-page) 2.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.35rem;
-}
-
-.ground-light {
-  background: var(--cream);
-  color: var(--soot);
-}
-
-.ground-dark {
-  background: var(--charcoal);
-  color: var(--bone);
-}
-
-.plate-object {
-  width: min(68vw, 20rem);
-  aspect-ratio: 1;
-}
-
-.ground-light .plate-object {
-  background: var(--soot);
-}
-
-.ground-dark .plate-object {
-  background: var(--bone);
-}
-
-.plate-object img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.plate figcaption {
-  width: min(var(--measure), 100%);
-  margin: 0;
+.plate-no {
+  margin: 2.75rem 0 0.55rem;
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--grey);
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
 }
 
-/*
-  Captions sit on the plate, not on the page, so the grey
-  follows the plate. Stone on cream, ash on charcoal.
-*/
-.ground-light figcaption {
-  color: var(--stone);
+.plate {
+  margin: 0;
+  padding: 3px 3px 0.85rem;
+  background: #000;
+  color: #E8E3D5;
 }
 
-.ground-dark figcaption {
-  color: var(--ash);
+.plate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+
+.plate-square {
+  aspect-ratio: 1;
+  background: linear-gradient(to bottom right, #D8D8D8, #BDBDBD);
+}
+
+.plate figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin: 0.8rem 0.15rem 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #E8E3D5;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.plate-sign {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.plate .stop {
+  color: #D0403A;
+}
+
+@media (min-width: 600px) {
+  .plate-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .contact {
