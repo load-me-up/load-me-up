@@ -932,6 +932,13 @@ hr::before {
   margin-top: var(--space-section);
 }
 
+.smallprint {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--grey);
+}
+
 /*
   One hand, on the contact line, and one fleuron, on the
   home page. Both are Jannon Ornaments, in the ink colour.
