@@ -617,8 +617,15 @@ main,
     margin-top: calc((clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 
-  .strapline {
-    margin-bottom: 1.25rem;
+  /*
+    "Anon." tucks up under "loa" with the same small gap
+    used under "meup" on a wide screen. The margin below
+    keeps the nav where it was.
+  */
+  .masthead .strapline {
+    margin-top: -0.45rem;
+    margin-bottom: 1.56rem;
+    line-height: 1;
   }
 
   .site-nav ul {
