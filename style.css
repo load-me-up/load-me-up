@@ -862,11 +862,13 @@ hr::before {
 /*
   Evidence plates. A contact sheet: plate number on the page,
   then a black field that does not follow the theme. Six
-  squares, three by two, and two by three on a phone. Thin
-  black gutters. The caption strip sits inside the field,
-  the words in bone, "Anon." at the right with the dark-theme
-  red on its full stop. Placeholders are a grey gradient.
-  Nothing here switches with the theme.
+  true squares, three by two, and two by three on a phone.
+  The field has a margin around the grid, and the gutters
+  are a visible share of the plate. The caption strip sits
+  inside the field, its words flush with the grid, "Anon."
+  at the right with the dark red on its full stop.
+  Placeholders are a grey gradient. Nothing here switches
+  with the theme.
 */
 .plate-no {
   margin: 2.75rem 0 0.55rem;
@@ -882,7 +884,7 @@ hr::before {
 
 .plate {
   margin: 0;
-  padding: 3px 3px 0.85rem;
+  padding: 2.5% 2.5% 0;
   background: #000;
   color: #E8E3D5;
 }
@@ -890,11 +892,18 @@ hr::before {
 .plate-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3px;
+  /*
+    Gap percentages are of the grid, which is already
+    inside the side padding. Dividing by 0.95 makes the
+    gutter 1.5% of the plate.
+  */
+  gap: calc(1.5% / 0.95);
 }
 
 .plate-square {
-  aspect-ratio: 1;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
   background: linear-gradient(to bottom right, #D8D8D8, #BDBDBD);
 }
 
@@ -903,7 +912,8 @@ hr::before {
   align-items: baseline;
   justify-content: space-between;
   gap: 1.25rem;
-  margin: 0.8rem 0.15rem 0;
+  margin: 0;
+  padding: calc(1.5% / 0.95) 0;
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
@@ -912,6 +922,11 @@ hr::before {
   color: #E8E3D5;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.plate-caption {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .plate-sign {
