@@ -920,16 +920,18 @@ hr::before {
 }
 
 /*
-  Evidence plates. Each one is its own piece: a title line
-  on the page, then a black field that does not follow the
-  theme. Six true squares, three by two, and two by three
-  on a phone. The field has a margin around the grid, and
-  the gutters are a visible share of the plate. The caption
-  strip sits inside the field, its words flush with the
-  grid, "Anon." at the right with the dark red on its full
-  stop. Placeholders are a grey gradient. Nothing on the
-  field switches with the theme. Plates in a room are
-  stacked with a clear gap; the newest one is last.
+  Evidence plates. Each one is its own piece: the title
+  on the page, the date at the right, then a black field
+  that does not follow the theme. Six true squares, three
+  by two, and two by three on a phone. The field has a
+  margin around the grid, and the gutters are a visible
+  share of the plate. The caption starts with the plate
+  number and sits inside the field, its words flush with
+  the grid, "Anon." at the right with the dark red on its
+  full stop. Placeholders are a grey gradient. Nothing on
+  the field switches with the theme. Numbers run across
+  both rooms. Plates in a room are stacked with a clear
+  gap; the newest one is last.
 */
 .plate-entry + .plate-entry {
   margin-top: 3rem;
