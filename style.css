@@ -932,11 +932,35 @@ hr::before {
   margin-top: var(--space-section);
 }
 
+/*
+  The note under the email. Sans, smaller than the reading
+  text, held to a short measure. The hairline above it is
+  centred on the column.
+*/
 .smallprint {
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  line-height: 1.55;
+  margin-top: 1.75rem;
+}
+
+.smallprint::before {
+  content: "";
+  display: block;
+  width: 3em;
+  height: 1px;
+  margin: 0 auto 1.25rem;
+  background: color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+.smallprint span {
+  display: block;
+  max-width: 32em;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.8em;
+  line-height: 1.5;
   color: var(--grey);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
 }
 
 /*
