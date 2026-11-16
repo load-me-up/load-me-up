@@ -58,16 +58,23 @@
   color: var(--ink);
 
   /*
-    "Body" is the family name in the @font-face rules below.
-    To rename the family, change "Body" here and in each of
-    those rules. Keep the spelling identical, including the
-    capital.
+    "Jannon Text" is the family name in the @font-face rules
+    below. To rename the family, change it here and in each
+    of those rules. Keep the spelling identical, including
+    the space and the capitals.
 
     Charter, Iowan Old Style and Georgia are what you see
     while Jannon Text loads, and in any browser that cannot
     use the file.
+
+    The symbol stack is for the few dingbats this face does
+    not contain: the manicule, the fleuron, the moon and
+    the sun. They are drawn as text, not emoji.
   */
-  --font-body: "Body", Charter, "Iowan Old Style", Georgia, serif;
+  --font-body: "Jannon Text", Charter, "Iowan Old Style", Georgia, serif;
+  --font-symbol: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", "Noto Sans Symbols2", "DejaVu Sans", serif;
+
+  font-synthesis: none;
 
   --measure: 65ch;
   --leading: 1.7;
@@ -92,26 +99,28 @@
 /*
   Font files.
 
-  Jannon Text, served as WOFF, is the body face. WOFF keeps
-  the extra OpenType features (small caps, old-style figures,
-  swashes, stylistic sets). The six files in /fonts/ are:
+  Jannon Text, served as WOFF, is the reading face. The six
+  files in /fonts/ are:
 
-    /fonts/JannonText.woff
-    /fonts/JannonText-Italic.woff
-    /fonts/JannonText-Medium.woff
-    /fonts/JannonText-MediumItalic.woff
-    /fonts/JannonText-Bold.woff
-    /fonts/JannonText-BoldItalic.woff
+    /fonts/JannonText.woff              weight 400, normal
+    /fonts/JannonText-Italic.woff       weight 400, italic
+    /fonts/JannonText-Medium.woff       weight 500, normal
+    /fonts/JannonText-MediumItalic.woff weight 500, italic
+    /fonts/JannonText-Bold.woff         weight 700, normal
+    /fonts/JannonText-BoldItalic.woff   weight 700, italic
 
   Each @font-face rule loads one of those files with
-  format("woff"). The family name stays "Body", which is
-  what --font-body names. Weights are 400 (regular), 500
-  (medium) and 700 (bold), each in a normal style and an
-  italic style.
+  format("woff") and font-display: swap. The family name is
+  "Jannon Text", which is what --font-body names. Weight 400
+  is running text. Weight 500 is headings and, where it
+  looks right, the wordmark. Weight 700 is strong. The bold
+  italic file is used only when strong text is also italic.
+  font-synthesis is none, so the browser does not fake a
+  weight or a style this face does not have.
 */
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -119,7 +128,7 @@
 }
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
@@ -127,7 +136,7 @@
 }
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
@@ -135,7 +144,7 @@
 }
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText-MediumItalic.woff") format("woff");
   font-weight: 500;
   font-style: italic;
@@ -143,7 +152,7 @@
 }
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
@@ -151,7 +160,7 @@
 }
 
 @font-face {
-  font-family: "Body";
+  font-family: "Jannon Text";
   src: url("/fonts/JannonText-BoldItalic.woff") format("woff");
   font-weight: 700;
   font-style: italic;
@@ -165,7 +174,7 @@
 
   1. font-variant (and font-kerning). This is the one to use.
      It says what you want in plain language, and it composes:
-     a span can add small caps without wiping the figure style.
+     a span can add a ligature without wiping the figure style.
   2. font-feature-settings. The same switch, by the four-letter
      tag the font uses. Reach for it when there is no
      font-variant name, or when you want the tag written out
@@ -173,46 +182,29 @@
 
        kern  kerning
        liga  common ligatures
+       hlig  historical ligatures
+       dlig  discretionary ligatures
        onum  old-style figures
        pnum  proportional figures
        lnum  lining figures
        tnum  tabular figures
-       smcp  small caps
-       c2sc  small caps for capitals as well as lowercase
-       dlig  discretionary ligatures
-       swsh  swashes
-       ss01  stylistic set 1
 
   Caution. font-feature-settings replaces the whole list it
   inherits. It does not add one tag. Any rule that sets it
   repeats the tags it still wants, usually kern and liga,
   plus the figure style.
 
-  Body text turns on kerning, common ligatures, and old-style
-  proportional figures. The rest are opt-in classes:
+  Running text turns on kerning, common ligatures, and
+  old-style proportional figures. Nav and footer use lining
+  figures. Dates use lining tabular figures, so the digits
+  match in width and do not drop to old-style.
 
-    .smallcaps   smcp and c2sc
-    .dlig        discretionary ligatures
-    .swash       swashes
-    .ss01        stylistic set 1
+  .dlig adds discretionary and historical ligatures, and
+  keeps the common ligatures and the old-style figures.
 
-  Dates use lining tabular figures, so the digits match in
-  width and do not drop to old-style.
-
-  The @font-feature-values block lets font-variant-alternates
-  call the swash and the stylistic set by name. It only applies
-  to the family "Body". The font-feature-settings tags do the
-  same job without that block, which is why both are set.
+  This face has no small caps, swashes, or stylistic set 1,
+  so those switches are not declared.
 */
-
-@font-feature-values "Body" {
-  @swash {
-    swsh: 1;
-  }
-  @styleset {
-    ss01: 1;
-  }
-}
 
 *,
 *::before,
@@ -369,6 +361,10 @@ main,
 .site-nav {
   grid-column: 1 / -1;
   grid-row: 3;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
 }
 
 .site-nav ul {
@@ -436,10 +432,13 @@ main,
   border: 0;
   background: none;
   color: var(--grey);
-  font-family: var(--font-body), "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols2", "Noto Sans Symbols 2", "DejaVu Sans", serif;
-  font-size: 1.35rem;
+  font-family: var(--font-symbol);
+  font-size: 1.25rem;
   font-weight: 400;
+  font-style: normal;
   font-variant-emoji: text;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
   line-height: 1;
   cursor: pointer;
 }
@@ -491,10 +490,10 @@ article {
   text-wrap: pretty;
 }
 
-h1 {
+h1:not(.masthead) {
   margin: 0 0 1rem;
   font-size: var(--size-title);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 1.15;
   text-wrap: balance;
@@ -609,7 +608,7 @@ hr::before {
 .room h2 {
   margin: 0 0 1rem;
   font-size: 1.35rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -669,26 +668,37 @@ hr::before {
 }
 
 /*
-  The manicule and the fleuron are dingbats. Name a few
-  symbol faces so the browser does not draw them from an
-  emoji font. Missing names are skipped.
+  The manicule, the fleuron, the moon and the sun are not in
+  Jannon Text. A symbol face draws them as text (U+FE0E in
+  the markup, and font-variant-emoji here). The box is locked
+  to one em so a different symbol face cannot change the
+  surrounding line.
 */
 .manicule,
 .fleuron {
-  font-family: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols2", "Noto Sans Symbols 2", "DejaVu Sans", var(--font-body);
-  font-variant-emoji: text;
+  font-family: var(--font-symbol);
   font-weight: 400;
+  font-style: normal;
+  font-variant-emoji: text;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
   line-height: 1;
 }
 
 .manicule {
-  font-size: 1.15em;
+  display: inline-block;
+  width: 1.15em;
+  height: 1em;
+  font-size: 1em;
+  vertical-align: -0.08em;
+  text-align: center;
 }
 
 .fleuron {
+  height: 1em;
   margin: 2.75rem 0 0.25rem;
   color: var(--ink);
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -712,7 +722,7 @@ hr::before {
 .endnotes h2 {
   margin: 0 0 0.75rem;
   font-size: 0.95rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .endnotes ol {
@@ -728,25 +738,9 @@ hr::before {
   color: var(--grey);
 }
 
-.smallcaps {
-  font-variant-caps: all-small-caps;
-  font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1, "smcp" 1, "c2sc" 1;
-  letter-spacing: 0.04em;
-}
-
 .dlig {
-  font-variant-ligatures: common-ligatures discretionary-ligatures;
-  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "onum" 1, "pnum" 1;
-}
-
-.swash {
-  font-variant-alternates: swash(swsh);
-  font-feature-settings: "kern" 1, "liga" 1, "swsh" 1, "onum" 1, "pnum" 1;
-}
-
-.ss01 {
-  font-variant-alternates: styleset(ss01);
-  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1, "onum" 1, "pnum" 1;
+  font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "hlig" 1, "onum" 1, "pnum" 1;
 }
 
 .site-footer {
@@ -755,6 +749,10 @@ hr::before {
   padding-bottom: var(--space-page);
   border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
   color: var(--grey);
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
 }
 
 /*

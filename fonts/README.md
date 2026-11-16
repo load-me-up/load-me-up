@@ -1,6 +1,6 @@
 # Fonts
 
-Jannon Text is the body face. These six WOFF files are the ones the site loads. WOFF keeps the extra OpenType features.
+Jannon Text is the reading face. The family name in `style.css` is "Jannon Text". These six WOFF files are the ones the site loads.
 
 - `JannonText.woff`, regular, weight 400, normal
 - `JannonText-Italic.woff`, italic, weight 400
@@ -9,4 +9,4 @@ Jannon Text is the body face. These six WOFF files are the ones the site loads. 
 - `JannonText-Bold.woff`, bold, weight 700, normal
 - `JannonText-BoldItalic.woff`, bold italic, weight 700
 
-`style.css` declares each file in an `@font-face` rule for the family name `Body`, with `format("woff")` and `font-display: swap`.
+Weight 400 is running text. Weight 500 is headings. Weight 700 is strong, and the bold italic file is used when strong text is also italic. Each file is declared with `format("woff")` and `font-display: swap`.
