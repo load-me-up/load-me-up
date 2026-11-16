@@ -422,36 +422,29 @@ main,
 }
 
 /*
-  Wide screens. Two lines, "load" over "meup", set tight.
-  "meup" is the wider word. It is tightened, and "load"
-  is opened, by the same amount, so the lines are one
-  width. The margin takes back the letter-spacing after
-  the last letter, and the edges meet.
+  Wide screens. "load" over "meup", left aligned, at the
+  face's own letter-spacing. The lines sit about as close
+  as two letters in the word. "meup" stays the longer
+  line; the right edge is left ragged.
 */
 @media (min-width: 600px) {
   .masthead {
-    line-height: 0.9;
+    line-height: 0.52;
   }
 
   .masthead a {
     display: block;
     width: max-content;
-    line-height: 0.9;
+    line-height: 0.52;
+    text-align: left;
   }
 
   .masthead .load,
   .masthead .meup {
     display: block;
-  }
-
-  .masthead .load {
-    letter-spacing: 0.0915em;
-    margin-right: -0.0915em;
-  }
-
-  .masthead .meup {
-    letter-spacing: -0.0915em;
-    margin-right: 0.0915em;
+    letter-spacing: 0;
+    margin-right: 0;
+    text-align: left;
   }
 
   .site-header {
@@ -571,7 +564,7 @@ main,
 @media (min-width: 600px) {
   .theme-toggle {
     font-size: 1.5rem;
-    margin-top: calc((0.9 * clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
+    margin-top: calc((0.52 * clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 }
 
