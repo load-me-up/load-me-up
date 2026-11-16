@@ -13,10 +13,10 @@
   /*
     The ornament spans are hidden in CSS until this face has
     loaded. A missing file leaves them blank, so the page
-    never shows a stray "(" or letter.
+    never shows a stray ")" or letter.
   */
   if (document.fonts && document.fonts.load) {
-    document.fonts.load('1em "Jannon Ornaments"', "(S").then(function (faces) {
+    document.fonts.load('1em "Jannon Ornaments"', ")S").then(function (faces) {
       var loaded = false;
       var i;
       for (i = 0; i < faces.length; i++) {

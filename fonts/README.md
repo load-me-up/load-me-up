@@ -29,6 +29,6 @@ Jannon Ornaments. The family name is "Jannon Ornaments". Glyphs are mapped to pl
 
 - `JannonOrnaments.woff`, weight 400
 
-`(` is the right-pointing hand on Nobody. `S` is the fleuron on the home page. `U` and `V` were tried: they are horizontal leaves with the weight to one side, so `S`, the upright one, is the one that sits on the centre. The rule uses `font-display: block`. The `.orn` spans stay hidden until the file has loaded.
+`)` is the right-pointing hand on Nobody. `S` is the fleuron on the home page. `U` and `V` were tried: they are horizontal leaves with the weight to one side, so `S`, the upright one, is the one that sits on the centre. The rule uses `font-display: block`. The `.orn` spans stay hidden until the file has loaded.
 
 Text, Antiqua and Sans use `format("woff")` and `font-display: swap`. `font-synthesis` is none, so a missing weight or style is never faked.
