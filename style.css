@@ -553,9 +553,10 @@ main,
   The moon and the sun. On a phone the icon is centred on
   the single wordmark. From 600px up the wordmark is two
   lines, and the icon sits on the top line, at the right.
-  1.25rem on a phone, 1.5rem from 600px up. The tap target
-  stays 44 by 44. Negative margins keep that box from
-  moving the layout. The colour is the secondary grey.
+  1.75rem on a phone, 2.4rem from 600px up. The tap target
+  stays 44 by 44, with the glyph centred in it. Negative
+  margins keep that box from moving the layout. The colour
+  is the text colour, so it stays readable in either theme.
 */
 .theme-toggle {
   grid-column: 2;
@@ -569,9 +570,9 @@ main,
   padding: 0;
   border: 0;
   background: none;
-  color: var(--grey);
+  color: var(--ink);
   font-family: var(--font-symbol);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: 400;
   font-style: normal;
   font-variant-emoji: text;
@@ -595,7 +596,7 @@ main,
 
 @media (min-width: 600px) {
   .theme-toggle {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     margin-top: calc((0.52 * clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 }
