@@ -67,9 +67,10 @@
     while Jannon Text loads, and in any browser that cannot
     use the file.
 
-    The symbol stack is for the few dingbats this face does
-    not contain: the manicule, the fleuron, the moon and
-    the sun. They are drawn as text, not emoji.
+    The symbol stack is for the moon and the sun, which
+    Jannon Text does not contain. They are drawn as text,
+    not emoji. The hand and the fleuron come from
+    Jannon Ornaments.
   */
   --font-body: "Jannon Text", Charter, "Iowan Old Style", Georgia, serif;
   --font-symbol: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", "Noto Sans Symbols2", "DejaVu Sans", serif;
@@ -109,7 +110,17 @@
     /fonts/JannonText-Bold.woff         weight 700, normal
     /fonts/JannonText-BoldItalic.woff   weight 700, italic
 
-  Each @font-face rule loads one of those files with
+  Jannon Ornaments is a second family, used only for the
+  hand on Nobody and the fleuron on the home page. Its
+  glyphs are mapped to plain ASCII. "(" is the
+  right-pointing hand. "S" is the fleuron: the upright
+  one, which sits on the centre line. "U" and "V" are
+  horizontal leaves whose weight falls to one side.
+  That file uses font-display: block. The
+  .orn spans stay hidden until the file has loaded, so a
+  missing file shows nothing rather than a stray letter.
+
+  Each Jannon Text rule loads one of those files with
   format("woff") and font-display: swap. The family name is
   "Jannon Text", which is what --font-body names. Weight 400
   is running text. Weight 500 is headings and, where it
@@ -165,6 +176,14 @@
   font-weight: 700;
   font-style: italic;
   font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Ornaments";
+  src: url("/fonts/JannonOrnaments.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
 /*
@@ -668,38 +687,45 @@ hr::before {
 }
 
 /*
-  The manicule, the fleuron, the moon and the sun are not in
-  Jannon Text. A symbol face draws them as text (U+FE0E in
-  the markup, and font-variant-emoji here). The box is locked
-  to one em so a different symbol face cannot change the
-  surrounding line.
+  One hand, on the contact line, and one fleuron, on the
+  home page. Both are Jannon Ornaments, in the ink colour.
+  The spans stay hidden until theme.js has seen the file
+  load. font-display: block keeps the fallback letter from
+  flashing during that wait. A failed load leaves them blank.
+  Feature settings are cleared so the reading face's figures
+  and ligatures cannot swap the ASCII ornament.
 */
-.manicule,
-.fleuron {
-  font-family: var(--font-symbol);
-  font-weight: 400;
+.orn {
+  font-family: "Jannon Ornaments";
+  font-weight: normal;
   font-style: normal;
-  font-variant-emoji: text;
-  font-variant-numeric: normal;
+  font-synthesis: none;
+  font-variant: normal;
   font-feature-settings: normal;
+  color: var(--ink);
   line-height: 1;
+  visibility: hidden;
 }
 
-.manicule {
+html.ornaments .orn {
+  visibility: visible;
+}
+
+.contact .orn {
   display: inline-block;
-  width: 1.15em;
-  height: 1em;
+  margin-right: 0.35em;
   font-size: 1em;
-  vertical-align: -0.08em;
-  text-align: center;
+  vertical-align: -0.06em;
 }
 
 .fleuron {
-  height: 1em;
   margin: 2.75rem 0 0.25rem;
-  color: var(--ink);
-  font-size: 2rem;
+  line-height: 1;
   text-align: center;
+}
+
+.fleuron .orn {
+  font-size: 1.5em;
 }
 
 .footnote-ref {
