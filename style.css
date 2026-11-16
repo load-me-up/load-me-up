@@ -406,6 +406,11 @@ main,
   text-transform: none;
 }
 
+/* A hair of air after the d, so it reads load + meup. */
+.masthead .load {
+  margin-right: 0.03em;
+}
+
 .masthead a,
 .masthead a:visited {
   color: var(--ink);
