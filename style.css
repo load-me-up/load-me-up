@@ -424,27 +424,48 @@ main,
 /*
   Wide screens. "load" over "meup", left aligned, at the
   face's own letter-spacing. The lines sit about as close
-  as two letters in the word. "meup" stays the longer
-  line; the right edge is left ragged.
+  as two letters in the word. "Anon." sits on load's
+  baseline, flush with the right edge of "meup".
 */
 @media (min-width: 600px) {
   .masthead {
+    margin-bottom: 1.85rem;
     line-height: 0.52;
   }
 
   .masthead a {
-    display: block;
+    display: inline-grid;
+    grid-template-columns: max-content;
     width: max-content;
     line-height: 0.52;
-    text-align: left;
+    align-items: baseline;
   }
 
   .masthead .load,
   .masthead .meup {
-    display: block;
     letter-spacing: 0;
-    margin-right: 0;
+    margin: 0;
+    line-height: 0.52;
     text-align: left;
+  }
+
+  .masthead .load {
+    grid-area: 1 / 1;
+    justify-self: start;
+    align-self: baseline;
+  }
+
+  .masthead .meup {
+    grid-area: 2 / 1;
+    justify-self: start;
+  }
+
+  .masthead .strapline {
+    grid-area: 1 / 1;
+    justify-self: end;
+    align-self: baseline;
+    margin: 0;
+    line-height: 1;
   }
 
   .site-header {
@@ -453,11 +474,15 @@ main,
 }
 
 .strapline {
-  grid-column: 1 / -1;
-  grid-row: 2;
+  display: block;
   margin: 0.2rem 0 1.85rem;
-  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
   font-size: 0.95rem;
+  line-height: var(--leading);
+  letter-spacing: normal;
+  color: var(--ink);
 }
 
 /* The nav and the toggle are placed in the header's grid directly. */
@@ -467,7 +492,7 @@ main,
 
 .site-nav {
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 2;
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
   font-variant-numeric: lining-nums proportional-nums;
@@ -575,8 +600,13 @@ main,
 */
 @media (max-width: 599px) {
   .site-header {
+    align-items: start;
     padding-bottom: 1.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  .theme-toggle {
+    margin-top: calc((clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 
   .strapline {
