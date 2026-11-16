@@ -58,21 +58,24 @@
   color: var(--ink);
 
   /*
-    "Jannon Text" is the family name in the @font-face rules
-    below. To rename the family, change it here and in each
-    of those rules. Keep the spelling identical, including
-    the space and the capitals.
+    Three families, plus the ornaments.
 
-    Charter, Iowan Old Style and Georgia are what you see
-    while Jannon Text loads, and in any browser that cannot
-    use the file.
+    --font-body     Jannon Text. Running text, the nav, the
+                    footer, and the "Anon." strapline.
+    --font-antiqua  Jannon Antiqua. The wordmark, headings,
+                    and essay and poem titles.
+    --font-sans     Jannon Sans Book. Dates under titles,
+                    and the Evidence captions. Nowhere else.
+    --font-symbol   The moon and the sun, drawn as text.
 
-    The symbol stack is for the moon and the sun, which
-    Jannon Text does not contain. They are drawn as text,
-    not emoji. The hand and the fleuron come from
-    Jannon Ornaments.
+    Charter, Iowan Old Style and Georgia stand in for the
+    serifs. system-ui stands in for the sans. The spelling
+    of each family name matches the @font-face rules,
+    including the space and the capitals.
   */
   --font-body: "Jannon Text", Charter, "Iowan Old Style", Georgia, serif;
+  --font-antiqua: "Jannon Antiqua", Charter, "Iowan Old Style", Georgia, serif;
+  --font-sans: "Jannon Sans", system-ui, sans-serif;
   --font-symbol: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", "Noto Sans Symbols2", "DejaVu Sans", serif;
 
   font-synthesis: none;
@@ -100,8 +103,11 @@
 /*
   Font files.
 
-  Jannon Text, served as WOFF, is the reading face. The six
-  files in /fonts/ are:
+  All of these are WOFF, format("woff"). Text, Antiqua and
+  Sans use font-display: swap. Ornaments uses block, and
+  the .orn spans stay hidden until that file has loaded.
+
+  Jannon Text, the reading face:
 
     /fonts/JannonText.woff              weight 400, normal
     /fonts/JannonText-Italic.woff       weight 400, italic
@@ -110,26 +116,36 @@
     /fonts/JannonText-Bold.woff         weight 700, normal
     /fonts/JannonText-BoldItalic.woff   weight 700, italic
 
-  Jannon Ornaments is a second family, used only for the
-  hand on Nobody and the fleuron on the home page. Its
-  glyphs are mapped to plain ASCII. "(" is the
-  right-pointing hand. "S" is the fleuron: the upright
-  one, which sits on the centre line. "U" and "V" are
-  horizontal leaves whose weight falls to one side.
-  That file uses font-display: block. The
-  .orn spans stay hidden until the file has loaded, so a
-  missing file shows nothing rather than a stray letter.
+  Running text is 400. Strong is 700, and bold italic is
+  the real Bold Italic file. The medium files are declared
+  so the family is complete. Nothing on the page asks for
+  weight 500.
 
-  Each Jannon Text rule loads one of those files with
-  format("woff") and font-display: swap. The family name is
-  "Jannon Text", which is what --font-body names. Weight 400
-  is running text, and it is the wordmark too. At that size
-  the medium cut thickens the stems and closes the counters,
-  so the wordmark stays at 400. Weight 500 is headings.
-  Weight 700 is strong. The bold italic file is used only
-  when strong text is also italic.
-  font-synthesis is none, so the browser does not fake a
-  weight or a style this face does not have.
+  Jannon Antiqua, the display face. Only 400, and 400 italic:
+
+    /fonts/JannonAntiquaPro.woff
+    /fonts/JannonAntiquaPro-Italic.woff
+
+  The wordmark, every heading, and the essay and poem
+  titles use it. .smallcaps uses its real small caps
+  (smcp and c2sc).
+
+  Jannon Sans Book, only for dates under titles and the
+  Evidence captions:
+
+    /fonts/JannonSans-Book.woff
+    /fonts/JannonSans-BookItalic.woff
+
+  Jannon Ornaments. Glyphs are mapped to plain ASCII.
+  "(" is the right-pointing hand on Nobody. "S" is the
+  fleuron on the home page: the upright one, which sits
+  on the centre line. "U" and "V" are horizontal leaves
+  whose weight falls to one side.
+
+    /fonts/JannonOrnaments.woff         weight 400
+
+  font-synthesis is none, so a missing weight or style is
+  never faked.
 */
 
 @font-face {
@@ -181,9 +197,41 @@
 }
 
 @font-face {
+  font-family: "Jannon Antiqua";
+  src: url("/fonts/JannonAntiquaPro.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Antiqua";
+  src: url("/fonts/JannonAntiquaPro-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Sans";
+  src: url("/fonts/JannonSans-Book.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Sans";
+  src: url("/fonts/JannonSans-BookItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Jannon Ornaments";
   src: url("/fonts/JannonOrnaments.woff") format("woff");
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: block;
 }
@@ -209,6 +257,8 @@
        pnum  proportional figures
        lnum  lining figures
        tnum  tabular figures
+       smcp  small caps
+       c2sc  small caps for capitals as well
 
   Caution. font-feature-settings replaces the whole list it
   inherits. It does not add one tag. Any rule that sets it
@@ -222,9 +272,11 @@
 
   .dlig adds discretionary and historical ligatures, and
   keeps the common ligatures and the old-style figures.
+  It stays on Jannon Text.
 
-  This face has no small caps, swashes, or stylistic set 1,
-  so those switches are not declared.
+  .smallcaps is Jannon Antiqua, with smcp and c2sc. These
+  faces have no swash, so there is no .swash. There is no
+  .ss01 either.
 */
 
 *,
@@ -344,8 +396,10 @@ main,
   grid-column: 1;
   grid-row: 1;
   margin: 0;
+  font-family: var(--font-antiqua);
   font-size: clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem);
   font-weight: 400;
+  font-style: normal;
   letter-spacing: -0.02em;
   line-height: 1;
   text-transform: none;
@@ -511,19 +565,33 @@ article {
   text-wrap: pretty;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+}
+
 h1:not(.masthead) {
   margin: 0 0 1rem;
   font-size: var(--size-title);
-  font-weight: 500;
   letter-spacing: 0;
   line-height: 1.15;
   text-wrap: balance;
 }
 
-.dateline {
-  margin: 0 0 1.5rem;
+.dateline,
+.pieces time {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
   color: var(--grey);
   font-size: 0.95rem;
+}
+
+.dateline {
+  margin: 0 0 1.5rem;
 }
 
 .intro {
@@ -600,11 +668,15 @@ hr::before {
   margin: 0 0 1.15rem;
 }
 
+.pieces a {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+}
+
 .pieces time {
   display: block;
   margin-top: 0.15rem;
-  color: var(--grey);
-  font-size: 0.95rem;
 }
 
 /*
@@ -629,7 +701,6 @@ hr::before {
 .room h2 {
   margin: 0 0 1rem;
   font-size: 1.35rem;
-  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -682,6 +753,24 @@ hr::before {
 .plate figcaption {
   width: min(var(--measure), 100%);
   margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.95rem;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+/*
+  Captions sit on the plate, not on the page, so the grey
+  follows the plate. Stone on cream, ash on charcoal.
+*/
+.ground-light figcaption {
+  color: var(--stone);
+}
+
+.ground-dark figcaption {
+  color: var(--ash);
 }
 
 .contact {
@@ -750,7 +839,6 @@ html.ornaments .orn {
 .endnotes h2 {
   margin: 0 0 0.75rem;
   font-size: 0.95rem;
-  font-weight: 500;
 }
 
 .endnotes ol {
@@ -769,6 +857,14 @@ html.ornaments .orn {
 .dlig {
   font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures;
   font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "hlig" 1, "onum" 1, "pnum" 1;
+}
+
+.smallcaps {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "kern" 1, "liga" 1, "smcp" 1, "c2sc" 1;
 }
 
 .site-footer {
