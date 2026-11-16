@@ -64,7 +64,7 @@
     --font-body     Jannon Text. Running text, the nav, the
                     footer, and the "Anon." strapline.
     --font-antiqua  Jannon Antiqua. The wordmark, headings,
-                    and essay and poem titles.
+                    essay and poem titles, and the home intro.
     --font-sans     Jannon Sans Book. Dates under titles,
                     and the Evidence captions. Nowhere else.
     --font-symbol   The moon and the sun, drawn as text.
@@ -127,9 +127,9 @@
     /fonts/JannonAntiquaPro.woff
     /fonts/JannonAntiquaPro-Italic.woff
 
-  The wordmark, every heading, and the essay and poem
-  titles use it. .smallcaps uses its real small caps
-  (smcp and c2sc).
+  The wordmark, every heading, the essay and poem
+  titles, and the home page intro use it. .smallcaps
+  uses its real small caps (smcp and c2sc).
 
   Jannon Sans Book, only for dates under titles and the
   Evidence captions:
@@ -608,6 +608,33 @@ h1:not(.masthead) {
 
 .intro {
   margin: 0 0 2rem;
+}
+
+/*
+  The home page intro is the first thing in main. Section
+  pages keep the plain intro above. Antiqua italic, a little
+  larger than the reading text, centred on a short measure
+  so the lines come out even. Slightly smaller on a phone.
+  The fleuron stays centred underneath.
+*/
+main > .intro:first-child {
+  margin: 2.75rem auto;
+  max-width: 28em;
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (min-width: 600px) {
+  main > .intro:first-child {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+    font-size: 1.2em;
+  }
 }
 
 p {
