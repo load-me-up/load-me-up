@@ -36,7 +36,7 @@
   data-theme="dark" on the html element when it was chosen.
   With JavaScript off, the light values below are what show.
 
-  Red is #8B0000 on cream. In the dark it is #B22222, still a
+  Red is #A8201A on cream. In the dark it is #D0403A, still a
   deep red, lighter so the dot shows on charcoal.
 */
 
@@ -51,7 +51,7 @@
   --paper: var(--cream);
   --ink: var(--soot);
   --grey: var(--stone);
-  --red: #8B0000;
+  --red: #A8201A;
 
   color-scheme: light;
   background: var(--paper);
@@ -93,7 +93,7 @@
   --paper: var(--charcoal);
   --ink: var(--bone);
   --grey: var(--ash);
-  --red: #B22222;
+  --red: #D0403A;
 
   color-scheme: dark;
   background: var(--paper);
@@ -948,7 +948,7 @@ html.ornaments .orn {
     --paper: var(--cream);
     --ink: var(--soot);
     --grey: var(--soot);
-    --red: #8B0000;
+    --red: #A8201A;
     background: var(--paper);
     color: var(--ink);
   }
