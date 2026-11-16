@@ -260,7 +260,7 @@ time {
 /*
   Body links. Ink text, a hairline dotted grey underline
   at reduced opacity. Hover makes it solid and ink.
-  Nav, masthead and footer override this.
+  Footer links use this too; the nav and masthead override it.
 */
 a:any-link {
   color: var(--ink);
@@ -759,18 +759,6 @@ hr::before {
   .site-footer {
     padding-bottom: calc(5rem + env(safe-area-inset-bottom));
   }
-}
-
-.site-footer a,
-.site-footer a:visited {
-  color: var(--grey);
-  text-decoration: none;
-}
-
-.site-footer a:hover,
-.site-footer a:focus-visible {
-  color: var(--ink);
-  text-decoration: none;
 }
 
 @media print {
