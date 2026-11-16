@@ -446,15 +446,10 @@ main,
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
+  column-gap: 1.75em;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.site-nav li:not(:last-child)::after {
-  content: "·";
-  margin-inline: 0.85em;
-  color: var(--grey);
 }
 
 .site-nav a,
@@ -527,9 +522,9 @@ main,
 }
 
 /*
-  Phones. The four doors sit in a two-by-two grid without
-  separators. The hidden dots stay, so the current page's red dot
-  does not shift anything.
+  Phones. The four doors sit in a two-by-two grid. The gap
+  is the same as on a wide screen. The hidden dots stay, so
+  the current page's red dot does not shift anything.
 */
 @media (max-width: 599px) {
   .site-header {
@@ -550,10 +545,6 @@ main,
     display: flex;
     align-items: center;
     min-height: 44px;
-  }
-
-  .site-nav li:not(:last-child)::after {
-    content: none;
   }
 
   .site-nav a {
