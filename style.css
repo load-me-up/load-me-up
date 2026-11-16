@@ -17,7 +17,8 @@
   --paper  the page background
   --ink    body text and links
   --grey   quiet secondary text: dates and the footer
-  --red    full stops only: the strapline, the sign-off, the current page
+  --red    full stops only: the strapline, page titles, the sign-off,
+           the current page
 
   Nothing else is a colour.
 
@@ -578,16 +579,23 @@ hr::before {
 
 /*
   Red is only ever a full stop: the "Anon." under the masthead,
-  the sign-off, and the current-page dot.
+  page titles, the sign-off, and the current-page dot.
 */
 .signoff {
   margin-top: var(--space-section);
 }
 
 .strapline .stop,
+.title-stop,
 .signoff .stop,
 .here {
   color: var(--red);
+}
+
+/* Half size, on the baseline, so it reads as punctuation. */
+.title-stop {
+  font-size: 0.5em;
+  vertical-align: baseline;
 }
 
 .room {
