@@ -424,12 +424,19 @@ main,
 /*
   Wide screens. "load" over "meup", left aligned, at the
   face's own letter-spacing. The lines sit about as close
-  as two letters in the word. "Anon." sits on load's
-  baseline, flush with the right edge of "meup".
+  as two letters in the word. "Anon." is the third line,
+  under "me", with a small gap below the baseline and
+  clear of the "p".
 */
 @media (min-width: 600px) {
   .masthead {
-    margin-bottom: 1.85rem;
+    /*
+      1.85rem is the gap under the two-line block. "Anon."
+      and the small gap above it sit inside that, so both
+      are taken back off and the nav stays the same
+      distance below the "p".
+    */
+    margin-bottom: calc(1.85rem - 1.1rem);
     line-height: 0.52;
   }
 
@@ -461,10 +468,10 @@ main,
   }
 
   .masthead .strapline {
-    grid-area: 1 / 1;
-    justify-self: end;
-    align-self: baseline;
-    margin: 0;
+    grid-area: 3 / 1;
+    justify-self: start;
+    align-self: start;
+    margin: 0.15rem 0 0;
     line-height: 1;
   }
 
