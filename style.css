@@ -123,9 +123,11 @@
   Each Jannon Text rule loads one of those files with
   format("woff") and font-display: swap. The family name is
   "Jannon Text", which is what --font-body names. Weight 400
-  is running text. Weight 500 is headings and, where it
-  looks right, the wordmark. Weight 700 is strong. The bold
-  italic file is used only when strong text is also italic.
+  is running text, and it is the wordmark too. At that size
+  the medium cut thickens the stems and closes the counters,
+  so the wordmark stays at 400. Weight 500 is headings.
+  Weight 700 is strong. The bold italic file is used only
+  when strong text is also italic.
   font-synthesis is none, so the browser does not fake a
   weight or a style this face does not have.
 */
