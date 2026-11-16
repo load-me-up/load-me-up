@@ -18,7 +18,7 @@
   --ink    body text and links
   --grey   quiet secondary text: dates and the footer
   --red    full stops only: the strapline, page titles, the sign-off,
-           the current page
+           the footer tagline, the current page
 
   Nothing else is a colour.
 
@@ -680,7 +680,8 @@ hr::before {
 
 /*
   Red is only ever a full stop: the "Anon." under the masthead,
-  page titles, the sign-off, and the current-page dot.
+  page titles, the sign-off, the footer tagline, and the
+  current-page dot.
 */
 .signoff {
   margin-top: var(--space-section);
@@ -689,6 +690,7 @@ hr::before {
 .strapline .stop,
 .title-stop,
 .signoff .stop,
+.tagline .stop,
 .here {
   color: var(--red);
 }
@@ -885,6 +887,11 @@ html.ornaments .orn {
 .site-footer p {
   margin: 0.2em 0;
   font-size: 0.95rem;
+}
+
+.site-footer .tagline {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 /*
