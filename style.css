@@ -407,18 +407,32 @@ main,
 }
 
 .masthead a,
-.masthead a:visited {
-  color: var(--ink);
+.masthead a:link,
+.masthead a:visited,
+.masthead a:hover,
+.masthead a:focus,
+.masthead a:focus-visible,
+.masthead a:active,
+.masthead a * {
   text-decoration: none;
+  background-image: none;
+  border-bottom: 0;
+  box-shadow: none;
 }
 
-.masthead a:hover,
+.masthead a,
+.masthead a:visited {
+  color: var(--ink);
+  transition: opacity 0.15s ease;
+}
+
+.masthead a:hover {
+  opacity: 0.8;
+}
+
 .masthead a:focus-visible {
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--ink);
-  text-underline-offset: 0.15em;
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 /*
@@ -617,14 +631,23 @@ main,
     margin-top: calc((clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
   }
 
+  .masthead {
+    margin-bottom: 1.85rem;
+  }
+
+  .masthead a {
+    display: block;
+    width: max-content;
+  }
+
   /*
     "Anon." tucks up under "loa" with the same small gap
-    used under "meup" on a wide screen. The margin below
-    keeps the nav where it was.
+    used under "meup" on a wide screen. The space below
+    the masthead keeps the nav where it was.
   */
   .masthead .strapline {
     margin-top: -0.45rem;
-    margin-bottom: 1.56rem;
+    margin-bottom: 0;
     line-height: 1;
   }
 
