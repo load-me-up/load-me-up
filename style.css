@@ -616,7 +616,7 @@ main,
 }
 
 /*
-  Phones. The four doors sit in a two-by-two grid. The gap
+  Phones. The doors sit in a two-column grid. The gap
   is the same as on a wide screen. The hidden dots stay, so
   the current page's red dot does not shift anything.
 */
@@ -696,7 +696,8 @@ h1:not(.masthead) {
 }
 
 .dateline,
-.pieces time {
+.pieces time,
+.note time {
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
@@ -932,6 +933,36 @@ hr::before {
     margin-top: 0.15rem;
     white-space: normal;
   }
+}
+
+/*
+  Marginalia. Each thought is a short paragraph, then an
+  optional date in the same grey Sans as the essay dates.
+  A comfortable gap sits between entries. They are not
+  links, so they take no hover.
+*/
+.notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note {
+  margin: 0 0 2rem;
+  scroll-margin-top: 1.25rem;
+}
+
+.note:last-child {
+  margin-bottom: 0;
+}
+
+.note p {
+  margin: 0;
+}
+
+.note time {
+  display: block;
+  margin-top: 0.45rem;
 }
 
 /*
@@ -1273,7 +1304,7 @@ html.ornaments .orn {
 @media (min-width: 600px) {
   .site-footer {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
     align-items: baseline;
     column-gap: 2rem;
     row-gap: 0.35em;
@@ -1287,6 +1318,7 @@ html.ornaments .orn {
   .site-footer > nav {
     grid-column: 2;
     grid-row: 1;
+    min-width: 0;
     text-align: right;
   }
 
@@ -1307,7 +1339,7 @@ html.ornaments .orn {
   }
 
   .site-footer nav p {
-    white-space: nowrap;
+    white-space: normal;
   }
 }
 
