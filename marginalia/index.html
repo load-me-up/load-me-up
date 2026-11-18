@@ -45,8 +45,8 @@
           <li><a href="/encounters/">Encounters</a><span class="here" aria-hidden="true">.</span></li>
           <li><a href="/nocturnes/">Nocturnes</a><span class="here" aria-hidden="true">.</span></li>
           <li><a href="/evidence/">Evidence</a><span class="here" aria-hidden="true">.</span></li>
-          <li><a href="/nobody.html">Nobody</a><span class="here" aria-hidden="true">.</span></li>
           <li><a href="/marginalia/" aria-current="page">Marginalia</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/nobody.html">Nobody</a><span class="here" aria-hidden="true">.</span></li>
         </ul>
       </nav>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="toggle-moon" aria-hidden="true">&#9790;&#65038;</span><span class="toggle-sun" aria-hidden="true">&#9788;&#65038;</span></button>
@@ -61,6 +61,11 @@
         Set: id (m-1), the sentences, and the date if there is one.
         One or two sentences. No title. Leave the time out if
         the thought has no date.
+        In the RSS item, the title is the full text if it is
+        60 characters or fewer. If it is longer, use the first
+        few words, cut at a word, about 50 to 60 characters,
+        then … with no space before it. The description keeps
+        the full text. Dates stay in +0000.
       -->
       <!-- EXAMPLE -->
       <li class="note" id="m-1">
@@ -72,7 +77,7 @@
   <footer class="site-footer">
     <p><a href="/">loadmeup.now</a></p>
     <nav aria-label="Footer">
-      <p><a href="/encounters/">Encounters</a> · <a href="/nocturnes/">Nocturnes</a> · <a href="/evidence/">Evidence</a> · <a href="/nobody.html">Nobody</a> · <a href="/marginalia/">Marginalia</a></p>
+      <p><a href="/encounters/">Encounters</a> · <a href="/nocturnes/">Nocturnes</a> · <a href="/evidence/">Evidence</a> · <a href="/marginalia/">Marginalia</a> · <a href="/nobody.html">Nobody</a></p>
     </nav>
     <p class="tagline">Door’s open<span class="stop">.</span></p>
     <p><a href="/feed.xml">RSS</a></p>
