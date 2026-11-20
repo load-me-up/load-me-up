@@ -976,9 +976,14 @@ hr::before {
 }
 
 aside.notes p {
-  font-size: 0.9em;
-  line-height: 1.6;
+  font-size: 0.8em;
+  line-height: 1.55;
+  margin: 0 0 0.75em;
   color: var(--grey);
+}
+
+aside.notes p a {
+  color: inherit;
 }
 
 .note {
@@ -1246,7 +1251,7 @@ html.ornaments .orn {
 }
 
 .fleuron {
-  margin: 2.5rem 0 1.5rem;
+  margin: 3rem 0 2.5rem;
   line-height: 1;
   text-align: center;
   font-family: "Jannon Ornaments";
