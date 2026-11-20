@@ -23,7 +23,7 @@
   Nothing else is a colour.
 
   --font-body         the reading face, then the fallbacks
-  --measure           the text column, about 56 characters
+  --measure           the text column, about 60 characters
   --leading           line height for prose
   --size-body         body size, fluid
   --size-title        title size, fluid
@@ -81,7 +81,7 @@
 
   font-synthesis: none;
 
-  --measure: 56ch;
+  --measure: 60ch;
   --leading: 1.7;
   --size-body: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
   --size-title: clamp(2rem, 1.35rem + 2vw, 2.75rem);
@@ -561,6 +561,19 @@ main,
 
 .site-nav a[aria-current="page"] + .here {
   visibility: visible;
+}
+
+@media (min-width: 600px) {
+  .site-nav ul {
+    justify-content: space-between;
+    column-gap: 1em;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 639px) {
+  .site-nav ul {
+    column-gap: 0.5em;
+  }
 }
 
 /*
