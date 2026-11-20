@@ -962,6 +962,12 @@ hr::before {
   list-style: none;
 }
 
+aside.notes p {
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: var(--grey);
+}
+
 .note {
   margin: 0 0 2rem;
   scroll-margin-top: 1.25rem;
@@ -1227,13 +1233,16 @@ html.ornaments .orn {
 }
 
 .fleuron {
-  margin: 2.75rem 0 0.25rem;
+  margin: 2.5rem 0 1.5rem;
   line-height: 1;
   text-align: center;
+  font-family: "Jannon Ornaments";
+  font-size: 1.4em;
+  color: var(--ink);
 }
 
 .fleuron .orn {
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
 .footnote-ref {
