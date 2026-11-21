@@ -6,11 +6,15 @@
 
   function saved() {
     try {
-      return localStorage.getItem(key);
+      return sessionStorage.getItem(key);
     } catch (err) {
       return null;
     }
   }
+
+  try {
+    localStorage.removeItem(key);
+  } catch (err) {}
 
   function darkNow() {
     return root.getAttribute("data-theme") === "dark";
@@ -84,7 +88,7 @@
       var nextDark = !darkNow();
       paint(nextDark);
       try {
-        localStorage.setItem(key, nextDark ? "dark" : "light");
+        sessionStorage.setItem(key, nextDark ? "dark" : "light");
       } catch (err) {}
       label(button);
     });

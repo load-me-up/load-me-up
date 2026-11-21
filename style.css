@@ -32,10 +32,10 @@
   --space-section     gap before a sign-off or a room
 
   An inline script in the head sets the theme before this
-  file is applied. With no saved choice it follows the
-  visitor's system. A saved choice overrides that. The
-  light values below are the fallback when that script
-  does not run.
+  file is applied. It follows the visitor's system: light,
+  unless the system is dark. The toggle lasts for the
+  visit. The light values below are the fallback when that
+  script does not run.
 
   Red is #A8201A on cream. In the dark it is #D0403A, still a
   deep red, lighter so the dot shows on charcoal.
