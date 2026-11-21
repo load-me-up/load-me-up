@@ -972,7 +972,7 @@ aside.notes p a {
 }
 
 .note {
-  margin: 0 0 2rem;
+  margin: 0 0 1.75rem;
   scroll-margin-top: 1.25rem;
 }
 
@@ -982,6 +982,13 @@ aside.notes p a {
 
 .note p {
   margin: 0;
+}
+
+.note p::before {
+  content: "¶";
+  font-family: var(--font-antiqua);
+  color: var(--red);
+  margin-right: 0.4em;
 }
 
 .note time {
