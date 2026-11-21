@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="email=no, telephone=no, address=no">
+  <meta name="author" content="Anon.">
+  <title>Cocks don’t need names</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F7F3E8">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch (err) {}
+      var systemDark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+      var dark = saved === "dark" || (saved !== "light" && systemDark);
+      if (dark) {
+        root.setAttribute("data-theme", "dark");
+      } else {
+        root.removeAttribute("data-theme");
+      }
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute("content", dark ? "#1C1B18" : "#F7F3E8");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="loadmeup" href="/feed.xml">
+  <script src="/theme.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <p class="masthead"><a href="/" aria-label="loadmeup"><span class="load">load</span><span class="meup">meup</span><span class="strapline">Anon<span class="stop">.</span></span></a></p>
+    <div class="site-tools">
+      <nav class="site-nav" aria-label="Sections">
+        <ul>
+          <li><a href="/encounters/">Encounters</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/nocturnes/" aria-current="page">Nocturnes</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/evidence/">Evidence</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/marginalia/">Marginalia</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/nobody.html">Nobody</a><span class="here" aria-hidden="true">.</span></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="toggle-moon" aria-hidden="true">&#9790;&#65038;</span><span class="toggle-sun" aria-hidden="true">&#9788;&#65038;</span></button>
+    </div>
+  </header>
+  <main id="content">
+    <article>
+      <header>
+        <h1>Cocks don’t need names<span class="title-stop" aria-hidden="true">.</span></h1>
+        <p class="dateline"><time datetime="2026-11-21T00:00:00+00:00">21 November 2026</time></p>
+      </header>
+      <div class="poem">I used to ask their names.
+Not anymore.
+I don’t need to know.
+I don’t want to know.
+They don’t want to know.
+Cocks don’t need names.
+
+He walks in in his work clothes,
+sometimes with a toolbox.
+They’re kind, mostly. A smile. No introduction.
+They all take shoes off. Nice of them.
+
+Hall, living room, sometimes we go upstairs.
+One, two, three. I like being shared.
+15 minutes, 30, 60…
+Satisfaction.
+
+No name on the sofa, no name on the pillow,
+no phone number, no note,
+no one to forget,
+except the ones I can’t.</div>
+      <p class="signoff">– Anon<span class="stop">.</span></p>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p><a href="/">loadmeup.now</a></p>
+    <nav aria-label="Footer">
+      <p><a href="/encounters/">Encounters</a> · <a href="/nocturnes/">Nocturnes</a> · <a href="/evidence/">Evidence</a> · <a href="/marginalia/">Marginalia</a> · <a href="/nobody.html">Nobody</a></p>
+    </nav>
+    <p class="tagline">Door’s open<span class="stop">.</span></p>
+    <p><a href="/feed.xml">RSS</a></p>
+  </footer>
+</body>
+</html>

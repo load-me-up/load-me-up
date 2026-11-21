@@ -929,21 +929,6 @@ hr::before {
   white-space: nowrap;
 }
 
-/*
-  Nocturnes with nothing in it yet. Same grey Sans as the
-  dates. The top margin matches the space above the first
-  Encounters title. When a poem arrives, this line goes
-  and the list comes back.
-*/
-.empty {
-  margin: 1.45rem 0 0;
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-style: normal;
-  color: var(--grey);
-  font-size: 0.95rem;
-}
-
 @media (max-width: 599px) {
   .poems li {
     display: block;
