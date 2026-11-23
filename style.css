@@ -645,7 +645,7 @@ main,
 }
 
 /*
-  Phones. The doors sit in a two-column grid. The gap
+  Phones. The doors sit in one row. The gap
   is the same as on a wide screen. The hidden dots stay, so
   the current page's red dot does not shift anything.
 */
@@ -682,7 +682,7 @@ main,
 
   .site-nav ul {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .site-nav li {
@@ -725,8 +725,7 @@ h1:not(.masthead) {
 }
 
 .dateline,
-.pieces time,
-.note time {
+.pieces time {
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
@@ -962,54 +961,6 @@ hr::before {
     margin-top: 0.15rem;
     white-space: normal;
   }
-}
-
-/*
-  Marginalia. Each thought is a short paragraph, then an
-  optional date in the same grey Sans as the essay dates.
-  A comfortable gap sits between entries. They are not
-  links, so they take no hover.
-*/
-.notes {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-aside.notes p {
-  font-size: 0.8em;
-  line-height: 1.55;
-  margin: 0 0 0.75em;
-  color: var(--grey);
-}
-
-aside.notes p a {
-  color: inherit;
-}
-
-.note {
-  margin: 0 0 1.75rem;
-  scroll-margin-top: 1.25rem;
-}
-
-.note:last-child {
-  margin-bottom: 0;
-}
-
-.note p {
-  margin: 0;
-}
-
-.note p::before {
-  content: "¶";
-  font-family: var(--font-antiqua);
-  color: var(--red);
-  margin-right: 0.4em;
-}
-
-.note time {
-  display: block;
-  margin-top: 0.45rem;
 }
 
 /*
