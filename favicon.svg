@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .tile { fill: #F7F3E8; }
+    .arrow { fill: #A8201A; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #1C1B18; }
+      .arrow { fill: #D0403A; }
+    }
+  </style>
+  <rect class="tile" width="32" height="32" rx="6"/>
+  <path class="arrow" d="M13 5h6v12.5h5.5L16 27 7.5 17.5H13z"/>
+</svg>

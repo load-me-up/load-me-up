@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="email=no, telephone=no, address=no">
+  <meta name="author" content="Adam Quire">
+  <title>Evidence</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F7F3E8">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try {
+        saved = sessionStorage.getItem("theme");
+      } catch (err) {}
+      var systemDark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+      var dark = saved === "dark" || (saved !== "light" && systemDark);
+      if (dark) {
+        root.setAttribute("data-theme", "dark");
+      } else {
+        root.removeAttribute("data-theme");
+      }
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute("content", dark ? "#1C1B18" : "#F7F3E8");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+  <link rel="alternate" type="application/rss+xml" title="loadmeup" href="/feed.xml">
+  <script src="/theme.js?v=2"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <p class="masthead"><a href="/" aria-label="loadmeup"><span class="load">load</span><span class="meup">meup</span><span class="strapline">Adam Quire<span class="stop">.</span></span></a></p>
+    <div class="site-tools">
+      <nav class="site-nav" aria-label="Sections">
+        <ul>
+          <li><a href="/">Encounters</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/evidence/" aria-current="page">Evidence</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/marginalia/">Marginalia</a><span class="here" aria-hidden="true">.</span></li>
+          <li><a href="/about.html">About</a><span class="here" aria-hidden="true">.</span></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="toggle-moon" aria-hidden="true">&#9790;&#65038;</span><span class="toggle-sun" aria-hidden="true">&#9788;&#65038;</span></button>
+    </div>
+  </header>
+  <main id="content">
+    <h1 class="visually-hidden">Evidence<span class="title-stop" aria-hidden="true">.</span></h1>
+    <p class="intro">Some of it stays behind, some of it goes out at night, and then there are the places it’s been. Don’t ask which is which.</p>
+    <section class="room" aria-labelledby="relics">
+      <h2 id="relics">Relics</h2>
+      <!--
+        A room may have one line under the heading:
+        <p class="room-intro">…</p>
+      -->
+      <!--
+        Copy this article to the bottom of its room.
+        Numbers run across both rooms. The next plate is
+        one higher than the last on the page.
+        Set: id (no-1), number (№&#8239;1), title, date and datetime,
+        six image paths, six alt texts, caption.
+        The number is a numero sign, a thin no-break space,
+        then the figure. The caption begins with it:
+        №&#8239;1 – Caption to come.
+        Replace each grey square with
+        <img class="plate-square" src="/evidence/no-1/01.jpg" alt="" width="1600" height="1600" loading="lazy">
+        and take aria-hidden off the grid.
+        Strip EXIF, including location. Nothing recognisable.
+        Square, black and white. Leave alt empty when the caption already says it.
+      -->
+      <article class="plate-entry" id="no-1" aria-labelledby="no-1-title">
+        <header class="plate-title">
+          <h3 id="no-1-title">Uniform</h3>
+          <time datetime="2026-11-21T00:00:00+00:00">21 November 2026</time>
+        </header>
+        <figure class="plate">
+          <div class="plate-grid">
+            <img class="plate-square" src="/evidence/no-1/01.jpg" alt="A small brown bottle with a black cap." width="1600" height="1600" loading="lazy">
+            <img class="plate-square" src="/evidence/no-1/02.jpg" alt="A polished steel ring." width="1600" height="1600" loading="lazy">
+            <img class="plate-square" src="/evidence/no-1/03.jpg" alt="A black paisley bandana, knotted." width="1600" height="1600" loading="lazy">
+            <img class="plate-square" src="/evidence/no-1/04.jpg" alt="A clear pump bottle of lubricant." width="1600" height="1600" loading="lazy">
+            <img class="plate-square" src="/evidence/no-1/05.jpg" alt="A mesh jockstrap with a black waistband." width="1600" height="1600" loading="lazy">
+            <img class="plate-square" src="/evidence/no-1/06.jpg" alt="A black leather harness with silver studs and buckles." width="1600" height="1600" loading="lazy">
+          </div>
+          <figcaption>
+            <span class="plate-caption">№&#8239;1 – A uniform, of sorts.</span>
+            <span class="plate-sign">Adam Quire<span class="stop">.</span></span>
+          </figcaption>
+        </figure>
+      </article>
+    </section>
+    <section class="room" aria-labelledby="voyages">
+      <h2 id="voyages">Voyages</h2>
+      <!--
+        Copy this article to the bottom of its room.
+        Numbers run across both rooms. The next plate is
+        one higher than the last on the page.
+        Set: id (no-2), number (№&#8239;2), title, date and datetime,
+        six image paths, six alt texts, caption.
+        The number is a numero sign, a thin no-break space,
+        then the figure. The caption begins with it:
+        №&#8239;2 – Caption to come.
+        Replace each grey square with
+        <img class="plate-square" src="/evidence/no-2/01.jpg" alt="" width="1600" height="1600" loading="lazy">
+        and take aria-hidden off the grid.
+        Strip EXIF, including location. Nothing recognisable.
+        Square, black and white. Leave alt empty when the caption already says it.
+      -->
+      <!-- EXAMPLE -->
+      <article class="plate-entry" id="no-2" aria-labelledby="no-2-title">
+        <header class="plate-title">
+          <h3 id="no-2-title">Untitled</h3>
+          <time datetime="2026-11-15T00:00:00+00:00">15 November 2026</time>
+        </header>
+        <figure class="plate">
+          <div class="plate-grid" aria-hidden="true">
+            <div class="plate-square"></div>
+            <div class="plate-square"></div>
+            <div class="plate-square"></div>
+            <div class="plate-square"></div>
+            <div class="plate-square"></div>
+            <div class="plate-square"></div>
+          </div>
+          <figcaption>
+            <span class="plate-caption">№&#8239;2 – Caption to come.</span>
+            <span class="plate-sign">Adam Quire<span class="stop">.</span></span>
+          </figcaption>
+        </figure>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p><a href="/">loadmeup.now</a></p>
+    <nav aria-label="Footer">
+      <p><a href="/">Encounters</a> · <a href="/evidence/">Evidence</a> · <a href="/marginalia/">Marginalia</a> · <a href="/about.html">About</a></p>
+    </nav>
+    <p class="tagline">Door’s open<span class="stop">.</span></p>
+    <p><a href="/feed.xml">RSS</a></p>
+  </footer>
+</body>
+</html>

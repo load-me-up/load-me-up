@@ -1,0 +1,1428 @@
+/*
+  loadmeup
+  Shared stylesheet. One file, no build step.
+
+  Restyle the site from the custom properties below.
+  The warm neutrals are declared once, in :root, as six values:
+
+  --cream      #F7F3E8  light paper
+  --soot       #1F1D1A  light ink, a warm near-black
+  --stone      #6E6A60  light secondary text
+  --charcoal   #1C1B18  dark paper, warm, not black
+  --bone       #E8E3D5  dark ink, a dimmed cream
+  --ash        #9A958A  dark secondary text
+
+  The page uses these through four roles, which switch with the theme:
+
+  --paper  the page background
+  --ink    body text and links
+  --grey   quiet secondary text: dates and the footer
+  --red    full stops only: the strapline, page titles, the sign-off,
+           the footer tagline, the current page
+
+  Nothing else is a colour.
+
+  --font-body         the reading face, then the fallbacks
+  --measure           the text column, about 60 characters
+  --leading           line height for prose
+  --size-body         body size, fluid
+  --size-title        title size, fluid
+  --space-page        outer margin
+  --space-paragraph   gap between paragraphs
+  --space-section     gap before a sign-off or a room
+
+  An inline script in the head sets the theme before this
+  file is applied. It follows the visitor's system: light,
+  unless the system is dark. The toggle lasts for the
+  visit. The light values below are the fallback when that
+  script does not run.
+
+  Red is #A8201A on cream. In the dark it is #D0403A, still a
+  deep red, lighter so the dot shows on charcoal.
+*/
+
+:root {
+  --cream: #F7F3E8;
+  --soot: #1F1D1A;
+  --stone: #6E6A60;
+  --charcoal: #1C1B18;
+  --bone: #E8E3D5;
+  --ash: #9A958A;
+
+  --paper: var(--cream);
+  --ink: var(--soot);
+  --grey: var(--stone);
+  --red: #A8201A;
+
+  color-scheme: light;
+  background: var(--paper);
+  color: var(--ink);
+
+  /*
+    Three families, plus the ornaments.
+
+    --font-body     Jannon Text. Running text, the nav, the
+                    footer, and the "Adam Quire." strapline.
+    --font-antiqua  Jannon Antiqua. The wordmark, headings,
+                    essay and poem titles, and the home intro.
+    --font-sans     Jannon Sans Book. Dates under titles,
+                    and the Evidence captions. Nowhere else.
+    --font-symbol   The moon and the sun, drawn as text.
+
+    Charter, Iowan Old Style and Georgia stand in for the
+    serifs. system-ui stands in for the sans. The spelling
+    of each family name matches the @font-face rules,
+    including the space and the capitals.
+  */
+  --font-body: "Jannon Text", Charter, "Iowan Old Style", Georgia, serif;
+  --font-antiqua: "Jannon Antiqua", Charter, "Iowan Old Style", Georgia, serif;
+  --font-sans: "Jannon Sans", system-ui, sans-serif;
+  --font-symbol: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", "Noto Sans Symbols2", "DejaVu Sans", serif;
+
+  font-synthesis: none;
+
+  --measure: 60ch;
+  --leading: 1.7;
+  --size-body: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  --size-title: clamp(2rem, 1.35rem + 2vw, 2.75rem);
+  --space-page: clamp(2rem, 7vw, 4.5rem);
+  --space-paragraph: 1.15em;
+  --space-section: 2.75rem;
+}
+
+:root[data-theme="dark"] {
+  --paper: var(--charcoal);
+  --ink: var(--bone);
+  --grey: var(--ash);
+  --red: #D0403A;
+
+  color-scheme: dark;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/*
+  Font files.
+
+  All of these are WOFF, format("woff"). Text, Antiqua and
+  Sans use font-display: swap. Ornaments uses block, and
+  the .orn spans stay hidden until that file has loaded.
+
+  Jannon Text, the reading face:
+
+    /fonts/JannonText.woff              weight 400, normal
+    /fonts/JannonText-Italic.woff       weight 400, italic
+    /fonts/JannonText-Medium.woff       weight 500, normal
+    /fonts/JannonText-MediumItalic.woff weight 500, italic
+    /fonts/JannonText-Bold.woff         weight 700, normal
+    /fonts/JannonText-BoldItalic.woff   weight 700, italic
+
+  Running text is 400. Strong is 700, and bold italic is
+  the real Bold Italic file. The medium files are declared
+  so the family is complete. Nothing on the page asks for
+  weight 500.
+
+  Jannon Antiqua, the display face. Only 400, and 400 italic:
+
+    /fonts/JannonAntiquaPro.woff
+    /fonts/JannonAntiquaPro-Italic.woff
+
+  The wordmark, every heading, the essay and poem
+  titles, and the home page intro use it. .smallcaps
+  uses its real small caps (smcp and c2sc).
+
+  Jannon Sans Book, only for dates under titles and the
+  Evidence captions:
+
+    /fonts/JannonSans-Book.woff
+    /fonts/JannonSans-BookItalic.woff
+
+  Jannon Ornaments. Glyphs are mapped to plain ASCII.
+  ")" is the right-pointing hand on Nobody. "S" is the
+  fleuron on the home page: the upright one, which sits
+  on the centre line. "U" and "V" are horizontal leaves
+  whose weight falls to one side.
+
+    /fonts/JannonOrnaments.woff         weight 400
+
+  font-synthesis is none, so a missing weight or style is
+  never faked.
+*/
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Text";
+  src: url("/fonts/JannonText-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Antiqua";
+  src: url("/fonts/JannonAntiquaPro.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Antiqua";
+  src: url("/fonts/JannonAntiquaPro-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Sans";
+  src: url("/fonts/JannonSans-Book.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Sans";
+  src: url("/fonts/JannonSans-BookItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Ornaments";
+  src: url("/fonts/JannonOrnaments.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+/*
+  OpenType features.
+
+  Two ways to turn a feature on:
+
+  1. font-variant (and font-kerning). This is the one to use.
+     It says what you want in plain language, and it composes:
+     a span can add a ligature without wiping the figure style.
+  2. font-feature-settings. The same switch, by the four-letter
+     tag the font uses. Reach for it when there is no
+     font-variant name, or when you want the tag written out
+     so you can see it. Tags used here:
+
+       kern  kerning
+       liga  common ligatures
+       hlig  historical ligatures
+       dlig  discretionary ligatures
+       onum  old-style figures
+       pnum  proportional figures
+       lnum  lining figures
+       tnum  tabular figures
+       smcp  small caps
+       c2sc  small caps for capitals as well
+
+  Caution. font-feature-settings replaces the whole list it
+  inherits. It does not add one tag. Any rule that sets it
+  repeats the tags it still wants, usually kern and liga,
+  plus the figure style.
+
+  Running text turns on kerning, common ligatures, and
+  old-style proportional figures. Nav and footer use lining
+  figures. Dates use lining tabular figures, so the digits
+  match in width and do not drop to old-style.
+
+  .dlig adds discretionary and historical ligatures, and
+  keeps the common ligatures and the old-style figures.
+  It stays on Jannon Text.
+
+  .smallcaps is Jannon Antiqua, with smcp and c2sc. These
+  faces have no swash, so there is no .swash. There is no
+  .ss01 either.
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--grey) 35%, transparent);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: 400;
+  font-style: normal;
+  line-height: var(--leading);
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "pnum" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dates: lining, tabular. */
+time {
+  color: var(--grey);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-page);
+  top: 0;
+  padding: 0.4rem 0.6rem;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/*
+  Body links. Ink text, a hairline dotted grey underline
+  at reduced opacity. Hover makes it solid and ink.
+  Footer links use this too; the nav and masthead override it.
+*/
+a:any-link {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: color-mix(in srgb, var(--grey) 50%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+a:visited {
+  color: var(--ink);
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-style: solid;
+  text-decoration-color: var(--ink);
+}
+
+/* No envelope, no generated icon, on a mailto. */
+a[href^="mailto:"]::before,
+a[href^="mailto:"]::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* The column. Header, text and footer share one measure. */
+.site-header,
+main,
+.site-footer {
+  width: min(var(--measure), calc(100% - 2 * var(--space-page)));
+  margin-inline: auto;
+}
+
+/*
+  The rule under the nav matches the footer's rule above it,
+  so the page reads: top rule, body, bottom rule.
+*/
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 1rem;
+  padding-top: clamp(2.75rem, 8vw, 5.5rem);
+  padding-bottom: 1.75rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+/*
+  The wordmark. On the home page it is the h1, elsewhere a p;
+  the class sets the size either way. It outranks the page titles.
+*/
+.masthead {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--font-antiqua);
+  font-size: clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: none;
+}
+
+.masthead a,
+.masthead a:link,
+.masthead a:visited,
+.masthead a:hover,
+.masthead a:focus,
+.masthead a:focus-visible,
+.masthead a:active,
+.masthead a * {
+  text-decoration: none;
+  background-image: none;
+  border-bottom: 0;
+  box-shadow: none;
+}
+
+.masthead a,
+.masthead a:visited {
+  color: var(--ink);
+  transition: opacity 0.15s ease;
+}
+
+.masthead a:hover {
+  opacity: 0.8;
+}
+
+.masthead a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/*
+  Wide screens. "load" over "meup", left aligned, at the
+  face's own letter-spacing. The lines sit about as close
+  as two letters in the word. "Adam Quire." is the third line,
+  under "me", with a small gap below the baseline and
+  clear of the "p".
+*/
+@media (min-width: 600px) {
+  .masthead {
+    /*
+      1.85rem is the gap under the two-line block. "Adam Quire."
+      and the small gap above it sit inside that, so both
+      are taken back off and the nav stays the same
+      distance below the "p".
+    */
+    margin-bottom: calc(1.85rem - 1.1rem);
+    line-height: 0.52;
+  }
+
+  .masthead a {
+    display: inline-grid;
+    grid-template-columns: max-content;
+    width: max-content;
+    line-height: 0.52;
+    align-items: baseline;
+  }
+
+  .masthead .load,
+  .masthead .meup {
+    letter-spacing: 0;
+    margin: 0;
+    line-height: 0.52;
+    text-align: left;
+  }
+
+  .masthead .load {
+    grid-area: 1 / 1;
+    justify-self: start;
+    align-self: baseline;
+  }
+
+  .masthead .meup {
+    grid-area: 2 / 1;
+    justify-self: start;
+  }
+
+  .masthead .strapline {
+    grid-area: 3 / 1;
+    justify-self: start;
+    align-self: start;
+    margin: 0.15rem 0 0;
+    line-height: 1;
+    min-width: 0;
+  }
+
+  .site-header {
+    align-items: start;
+  }
+}
+
+.strapline {
+  display: block;
+  margin: 0.2rem 0 1.85rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: var(--leading);
+  letter-spacing: normal;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+/* The nav and the toggle are placed in the header's grid directly. */
+.site-tools {
+  display: contents;
+}
+
+.site-nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.75em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a,
+.site-nav a:visited {
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--ink);
+  text-underline-offset: 0.22em;
+}
+
+/*
+  Every item carries a dot, so the menu keeps its width on every
+  page. Only the current page's dot is shown. The current word stays
+  at normal weight: bold would widen it and push the others along.
+*/
+.site-nav a[aria-current="page"] {
+  text-decoration: none;
+}
+
+.site-nav .here {
+  visibility: hidden;
+}
+
+.site-nav a[aria-current="page"] + .here {
+  visibility: visible;
+}
+
+@media (min-width: 600px) {
+  .site-nav ul {
+    justify-content: space-between;
+    column-gap: 1em;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 639px) {
+  .site-nav ul {
+    column-gap: 0.5em;
+  }
+}
+
+/*
+  The moon and the sun. On a phone the icon is centred on
+  the single wordmark. From 600px up the wordmark is two
+  lines, and the icon sits on the top line, at the right.
+  1.75rem on a phone, 2.4rem from 600px up. The tap target
+  stays 44 by 44, with the glyph centred in it. Negative
+  margins keep that box from moving the layout. The colour
+  is the text colour, so it stays readable in either theme.
+*/
+.theme-toggle {
+  grid-column: 2;
+  grid-row: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 -12px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-symbol);
+  font-size: 1.75rem;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-emoji: text;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.theme-toggle .toggle-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .toggle-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .toggle-sun {
+  display: inline;
+}
+
+@media (min-width: 600px) {
+  .theme-toggle {
+    font-size: 2.4rem;
+    margin-top: calc((0.52 * clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
+  }
+}
+
+/*
+  Phones. The doors sit in a two-column grid. The gap
+  is the same as on a wide screen. The hidden dots stay, so
+  the current page's red dot does not shift anything.
+*/
+@media (max-width: 599px) {
+  .site-header {
+    align-items: start;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .theme-toggle {
+    margin-top: calc((clamp(2.775rem, 1.95rem + 2.4vw, 3.6rem) - 44px) / 2);
+  }
+
+  .masthead {
+    margin-bottom: 1.85rem;
+  }
+
+  .masthead a {
+    display: block;
+    width: max-content;
+  }
+
+  /*
+    "Adam Quire." tucks up under "loa" with the same small gap
+    used under "meup" on a wide screen. The space below
+    the masthead keeps the nav where it was.
+  */
+  .masthead .strapline {
+    margin-top: -0.45rem;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  .site-nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-nav li {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+main {
+  padding-bottom: 0.5rem;
+}
+
+article {
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1:not(.masthead) {
+  margin: 0 0 1rem;
+  font-size: var(--size-title);
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.dateline,
+.pieces time,
+.note time {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--grey);
+  font-size: 0.95rem;
+}
+
+.dateline {
+  margin: 0 0 1.5rem;
+}
+
+.intro {
+  margin: 0 0 2rem;
+}
+
+/*
+  The home page intro sits above the poem list. Section
+  pages keep the plain intro above. Antiqua italic, a little
+  larger than the reading text, centred on a short measure
+  so the lines come out even. Slightly smaller on a phone.
+  The fleuron stays centred underneath.
+*/
+main > .intro:has(+ .pieces) {
+  margin: 2.75rem auto;
+  max-width: 28em;
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (min-width: 600px) {
+  main > .intro:has(+ .pieces) {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+    font-size: 1.2em;
+  }
+}
+
+p {
+  margin: 0 0 var(--space-paragraph);
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+}
+
+blockquote {
+  margin: var(--space-section) 0;
+  padding: 0.1rem 0 0.1rem 1.2rem;
+  border-left: 2px solid color-mix(in srgb, var(--grey) 40%, transparent);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/*
+  Section break. In the HTML this is a plain <hr>.
+  The asterisks are drawn here, centred.
+*/
+hr {
+  display: block;
+  height: auto;
+  margin: var(--space-section) 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--grey);
+  font-style: normal;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+hr::before {
+  content: "* * *";
+}
+
+/*
+  Poem. One line per line in the file. A blank line between
+  stanzas is the stanza gap, because white-space: pre-line
+  keeps line breaks and still wraps a long line on a phone.
+  Start the first line immediately after the opening tag,
+  or the break after that tag becomes a blank line.
+*/
+.poem {
+  margin: 0 0 var(--space-paragraph);
+  line-height: 1.55;
+  white-space: pre-line;
+  hyphens: manual;
+  text-wrap: wrap;
+}
+
+.pieces {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pieces li {
+  margin: 0 0 1.15rem;
+}
+
+.pieces a {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pieces time {
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/*
+  Encounters. A year in small grey Sans, then each essay:
+  the title, one italic line, the date. A hairline between
+  entries. The pieces above stay as they are for a list
+  that has not been grouped.
+*/
+.year {
+  margin: 2.75rem 0 0;
+}
+
+.year:first-of-type {
+  margin-top: 0;
+}
+
+.year h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--grey);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.year .pieces li {
+  margin: 0;
+  padding: 1.45rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+.year .pieces li:first-child {
+  border-top: 0;
+}
+
+.year .pieces a {
+  font-size: 1.3em;
+  line-height: 1.25;
+}
+
+.teaser {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.year .pieces time {
+  margin-top: 0.45rem;
+}
+
+/*
+  Nocturnes. Title on the left, date on the right, one
+  baseline, a dotted leader between them. On a phone the
+  date drops under the title and the leader goes.
+*/
+.poems li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75em;
+  margin: 0 0 1.05rem;
+}
+
+.poems a {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.poems .leader {
+  flex: 1 1 0;
+  min-width: 1.25em;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--grey);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.85em;
+  letter-spacing: 0.42em;
+  line-height: 1;
+}
+
+.poems .leader::before {
+  content: "····························································";
+}
+
+.poems time {
+  flex: 0 0 auto;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .poems li {
+    display: block;
+  }
+
+  .poems a {
+    white-space: normal;
+  }
+
+  .poems .leader {
+    display: none;
+  }
+
+  .poems time {
+    margin-top: 0.15rem;
+    white-space: normal;
+  }
+}
+
+/*
+  Marginalia. Each thought is a short paragraph, then an
+  optional date in the same grey Sans as the essay dates.
+  A comfortable gap sits between entries. They are not
+  links, so they take no hover.
+*/
+.notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+aside.notes p {
+  font-size: 0.8em;
+  line-height: 1.55;
+  margin: 0 0 0.75em;
+  color: var(--grey);
+}
+
+aside.notes p a {
+  color: inherit;
+}
+
+.note {
+  margin: 0 0 1.75rem;
+  scroll-margin-top: 1.25rem;
+}
+
+.note:last-child {
+  margin-bottom: 0;
+}
+
+.note p {
+  margin: 0;
+}
+
+.note p::before {
+  content: "¶";
+  font-family: var(--font-antiqua);
+  color: var(--red);
+  margin-right: 0.4em;
+}
+
+.note time {
+  display: block;
+  margin-top: 0.45rem;
+}
+
+/*
+  Red is only ever a full stop: the "Adam Quire." under the masthead,
+  page titles, the sign-off, the footer tagline, and the
+  current-page dot.
+*/
+.signoff {
+  margin-top: var(--space-section);
+}
+
+.strapline .stop,
+.title-stop,
+.signoff .stop,
+.tagline .stop,
+.here {
+  color: var(--red);
+}
+
+/*
+  Evidence rooms. Relics, then Voyages. The heading is
+  Antiqua, larger than a plate title. A one-line intro is
+  optional. Rooms sit further apart than the plates inside
+  them, and a hairline sits just above every room after
+  the first.
+*/
+.room + .room {
+  margin-top: 5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+.room h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.6em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.room h2:has(+ .room-intro) {
+  margin-bottom: 0.45rem;
+}
+
+.room-intro {
+  margin: 0 0 1.5rem;
+  line-height: 1.45;
+}
+
+/*
+  Evidence plates. Each one is its own piece: the title
+  on the page, the date at the right, then a black field
+  that does not follow the theme. Six true squares, three
+  by two, and two by three on a phone. The field has a
+  margin around the grid, and the gutters are a visible
+  share of the plate. The caption strip follows the grid
+  in the flow: a gap, then the words, then the field's
+  own padding. It grows with the caption. The number
+  starts the line, flush with the grid, and "Adam Quire." sits
+  at the right with the dark red on its full stop.
+  Placeholders are a grey gradient. Nothing on the field
+  switches with the theme. Numbers run across both rooms.
+  Plates in a room are stacked with a clear gap; the
+  newest one is last.
+*/
+.plate-entry + .plate-entry {
+  margin-top: 3rem;
+}
+
+.plate-entry {
+  scroll-margin-top: 1.25rem;
+}
+
+.plate-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin: 0 0 0.65rem;
+}
+
+.plate-title h3 {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.3em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.plate-title time {
+  flex: 0 0 auto;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .plate-title {
+    display: block;
+  }
+
+  .plate-title time {
+    display: block;
+    margin-top: 0.2rem;
+    white-space: normal;
+  }
+}
+
+.plate {
+  margin: 0;
+  padding: 2.5%;
+  background: #000;
+  color: #E8E3D5;
+}
+
+.plate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /*
+    Gap percentages are of the grid, which is already
+    inside the side padding. Dividing by 0.95 makes the
+    gutter 1.5% of the plate.
+  */
+  gap: calc(1.5% / 0.95);
+}
+
+.plate-square {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: linear-gradient(to bottom right, #D8D8D8, #BDBDBD);
+}
+
+.plate figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #E8E3D5;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+.plate-caption {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.plate-sign {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.plate .stop {
+  color: #D0403A;
+}
+
+@media (min-width: 600px) {
+  .plate-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.contact {
+  margin-top: var(--space-section);
+}
+
+/*
+  The note under the email. Sans, smaller than the reading
+  text, centred on a short measure like a colophon. The
+  hairline above it is centred on the same column.
+*/
+.smallprint {
+  margin-top: 1.75rem;
+}
+
+.smallprint::before {
+  content: "";
+  display: block;
+  width: 3em;
+  height: 1px;
+  margin: 0 auto 1.25rem;
+  background: color-mix(in srgb, var(--grey) 40%, transparent);
+}
+
+.smallprint span {
+  display: block;
+  max-width: 30em;
+  margin-inline: auto;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.8em;
+  line-height: 1.5;
+  color: var(--grey);
+  text-align: center;
+  text-wrap: balance;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+/*
+  One hand, on the contact line, and one fleuron, on the
+  home page. Both are Jannon Ornaments, in the ink colour.
+  The spans stay hidden until theme.js has seen the file
+  load. font-display: block keeps the fallback letter from
+  flashing during that wait. A failed load leaves them blank.
+  Feature settings are cleared so the reading face's figures
+  and ligatures cannot swap the ASCII ornament.
+*/
+.orn {
+  font-family: "Jannon Ornaments";
+  font-weight: normal;
+  font-style: normal;
+  font-synthesis: none;
+  font-variant: normal;
+  font-feature-settings: normal;
+  color: var(--ink);
+  line-height: 1;
+  visibility: hidden;
+}
+
+html.ornaments .orn {
+  visibility: visible;
+}
+
+.contact .orn {
+  display: inline-block;
+  margin-right: 0.35em;
+  font-size: 1em;
+  vertical-align: -0.06em;
+}
+
+.fleuron {
+  margin: 3rem 0 2.5rem;
+  line-height: 1;
+  text-align: center;
+  font-family: "Jannon Ornaments";
+  font-size: 1.4em;
+  color: var(--ink);
+}
+
+.fleuron .orn {
+  font-size: 1em;
+}
+
+.footnote-ref {
+  font-size: 0.75em;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+  line-height: 0;
+}
+
+.endnotes {
+  margin-top: var(--space-section);
+  padding-top: 1.15rem;
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "tnum" 1;
+}
+
+.endnotes h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+.endnotes ol {
+  margin: 0;
+  padding-left: 1.35rem;
+}
+
+.endnotes li {
+  margin-top: 0.55em;
+}
+
+.endnotes li::marker {
+  color: var(--grey);
+}
+
+.dlig {
+  font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "hlig" 1, "onum" 1, "pnum" 1;
+}
+
+.smallcaps {
+  font-family: var(--font-antiqua);
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "kern" 1, "liga" 1, "smcp" 1, "c2sc" 1;
+}
+
+.site-footer {
+  margin-top: var(--space-section);
+  padding-top: 1.25rem;
+  padding-bottom: var(--space-page);
+  border-top: 1px solid color-mix(in srgb, var(--grey) 40%, transparent);
+  color: var(--grey);
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "lnum" 1, "pnum" 1;
+}
+
+/*
+  The smaller size sits on the paragraphs, not the footer, so the
+  footer's 65ch column (and its rule) matches the header's.
+*/
+.site-footer p {
+  margin: 0.2em 0;
+  font-size: 0.95rem;
+}
+
+.site-footer .tagline {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/*
+  Wide screens. The footer spans the same column as the text.
+  The name and the tagline sit on the left. The section links
+  and RSS sit on the right, flush to that edge. Each pair shares
+  a baseline, so the tagline lines up with RSS.
+*/
+@media (min-width: 600px) {
+  .site-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
+    align-items: baseline;
+    column-gap: 2rem;
+    row-gap: 0.35em;
+  }
+
+  .site-footer > p:first-of-type {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-footer > nav {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    text-align: right;
+  }
+
+  .site-footer > p:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .site-footer > p:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+  }
+
+  .site-footer > p,
+  .site-footer nav p {
+    margin: 0;
+  }
+
+  .site-footer nav p {
+    white-space: normal;
+  }
+}
+
+/* Clear Safari's floating address bar on phones. */
+@media (max-width: 599px) {
+  .site-footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media print {
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: var(--cream);
+    --ink: var(--soot);
+    --grey: var(--soot);
+    --red: #A8201A;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    font-size: 12pt;
+  }
+
+  .skip-link,
+  .theme-toggle {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
