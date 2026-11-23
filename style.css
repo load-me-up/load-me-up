@@ -1137,10 +1137,6 @@ hr::before {
   }
 }
 
-.contact {
-  margin-top: var(--space-section);
-}
-
 .contact:has(+ .contact) {
   margin-bottom: 0;
 }
