@@ -1193,6 +1193,14 @@ aside.notes p a {
   margin-top: var(--space-section);
 }
 
+.contact:has(+ .contact) {
+  margin-bottom: 0;
+}
+
+.contact + .contact {
+  margin-top: 0;
+}
+
 /*
   The note under the email. Sans, smaller than the reading
   text, centred on a short measure like a colophon. The
