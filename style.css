@@ -720,6 +720,12 @@ h1:not(.masthead) {
   text-wrap: balance;
 }
 
+article h1 {
+  font-variant-caps: small-caps;
+  font-synthesis: none;
+  letter-spacing: 0.03em;
+}
+
 .pieces time {
   font-family: var(--font-sans);
   font-weight: 400;
@@ -817,6 +823,7 @@ hr::before {
   white-space: pre-line;
   hyphens: manual;
   text-wrap: wrap;
+  font-variant-numeric: oldstyle-nums proportional-nums;
 }
 
 .pieces {
