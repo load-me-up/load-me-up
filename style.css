@@ -720,17 +720,12 @@ h1:not(.masthead) {
   text-wrap: balance;
 }
 
-.dateline,
 .pieces time {
   font-family: var(--font-sans);
   font-weight: 400;
   font-style: normal;
   color: var(--grey);
   font-size: 0.95rem;
-}
-
-.dateline {
-  margin: 0 0 1.5rem;
 }
 
 .intro {
@@ -961,16 +956,11 @@ hr::before {
 
 /*
   Red is only ever a full stop: the "Adam Quire." under the masthead,
-  page titles, the sign-off, the footer tagline, and the
+  page titles, the footer tagline, and the
   current-page dot.
 */
-.signoff {
-  margin-top: var(--space-section);
-}
-
 .strapline .stop,
 .title-stop,
-.signoff .stop,
 .tagline .stop,
 .here {
   color: var(--red);
