@@ -720,7 +720,7 @@ h1:not(.masthead) {
   text-wrap: balance;
 }
 
-article h1 {
+article h1:not(.masthead) {
   margin-bottom: 1.55em;
   font-size: var(--size-body);
   line-height: var(--leading);
