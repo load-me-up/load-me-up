@@ -721,6 +721,9 @@ h1:not(.masthead) {
 }
 
 article h1 {
+  margin-bottom: 1.55em;
+  font-size: var(--size-body);
+  line-height: var(--leading);
   font-variant-caps: small-caps;
   font-synthesis: none;
   letter-spacing: 0.03em;
