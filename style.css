@@ -829,6 +829,8 @@ hr::before {
   font-variant-numeric: oldstyle-nums proportional-nums;
 }
 
+.poem-media { margin: 2.5rem 0 0; } .poem-media video, .poem-media img { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
+
 .pieces {
   margin: 0;
   padding: 0;
